@@ -1,6 +1,6 @@
 ---
 title: 'Methods for assessing the active travel impacts of major transport infrastructure projects'
-author: "Robin Lovelace, Malcolm Morgan"
+# author: "Robin Lovelace, Malcolm Morgan"
 date: "`r Sys.Date()`"
 output:
     bookdown::pdf_document2:
@@ -10,7 +10,7 @@ bibliography: /home/robin/allrefs.bib
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = F, message = FALSE, fig.align = "center", fig.height = 4, options(scipen=999), out.width = "80%")
-pkgs = c("sp", "tmap", "sf", "stplanr", "tidyverse")
+pkgs = c("mapview", "tmap", "sf", "stplanr", "tidyverse")
 pkgs_installed = pkgs %in% installed.packages()
 pkgs_to_install = pkgs[!pkgs_installed]
 if(any(!pkgs_installed)) install.packages(pkgs)
@@ -81,7 +81,7 @@ The lack of organisational overlap between major transport infrastructure and ac
 Major infrastructure can impact upon active transport in a range of different ways. To organise the assessment process, these can be categorised into three broad types of impact, as illustrated in Figure \@ref(fig:type).
 
 ```{r type, echo=FALSE, fig.cap="A typology of active travel options.", out.width="100%"}
-knitr::include_graphics("infra-active/active-travel-options.png")
+knitr::include_graphics("figures/active-travel-options.png")
 ```
 
 <!-- *Lable indervidual diagrams ... -->
@@ -91,6 +91,7 @@ knitr::include_graphics("infra-active/active-travel-options.png")
 Linear infrastructure can become a barrier to travel perpendicular to the new infrastructure, severing routes that were used before the new infrastructure was built. This is especially true for railways and motorways, which may be at a different level to the surrounding road network, and are not crossable by walkers and cyclists without dedicated crossings. Understanding where severance occurs and how many people are affected can aid in effectively planning  the construction of bridges, tunnels, and other crossings.
 
 ## Parallels
+
 New linear infrastructure provides an opportunity to construct new footpaths and cycle paths alongside the infrastructure. The marginal cost of adding active transport routes alongside other planned infrastructure can be lower than constructing a dedicated route.  There are several types of active transport that may take place along a parallel route:
 
 1) People who would have used the new infrastructure choose the active travel option instead;
@@ -164,6 +165,7 @@ Data on existing an potential future travel active travel patters was taken from
 f = "lewes_uckfield_objects.Rdata"
 if(file.exists(f)) {
   load(f)
+  lewes_uckfield = read_sf("https://github.com/npct/pct-team/raw/master/input-data/lewes_uckfield.geojson")
 } else {
   lewes_uckfield = read_sf("https://github.com/npct/pct-team/raw/master/input-data/lewes_uckfield.geojson")
   z = read_sf("https://github.com/npct/pct-outputs-regional-notR/raw/master/commute/msoa/east-sussex/z.geojson")
@@ -296,7 +298,7 @@ tm_shape(l_lc) + tm_lines(col = "grey", lwd = 3) +
 tm_shape(buff) + tm_borders(col = "blue", lwd = 3) +
   tm_shape(lewes_uckfield) + tm_lines(lwd = 5, col = "black") +
   tm_shape(l_cp) + tm_dots() +
-  tm_shape(l_lc[sel_para & sel_centre point,]) + tm_lines()
+  tm_shape(l_lc[sel_para & sel_centrepoint, ]) + tm_lines()
 ```
 
 To resolve this issue, a smaller buffer was used to select line centre points. This was set at 5 km.
@@ -312,7 +314,7 @@ tm_shape(buff7) + tm_borders(col = "blue", lwd = 3) +
 tm_shape(buff_small) + tm_borders(col = "blue", lwd = 3) +
   tm_shape(lewes_uckfield) + tm_lines(lwd = 5, col = "black") +
   tm_shape(l_cp) + tm_dots() +
-  tm_shape(l_lc[sel_para & sel_centre point5 & !sel_smallbuff,]) + tm_lines(col = "orange", lwd = 5) +
+  tm_shape(l_lc[sel_para & sel_centrepoint5 & !sel_smallbuff,]) + tm_lines(col = "orange", lwd = 5) +
   tm_shape(l_lc[sel_finalpar,]) + tm_lines()
 ```
 
@@ -345,10 +347,16 @@ From Figure \@ref(fig:segs)b it is clear that the points of highest potential se
 
 ```{r perpmost, fig.cap="The 1 km segment on the proposed rail line with the highest level of severance in cycling potential, under the Government Target scenario."}
 l_most = l_agg[which.max(l_agg$govtarget_slc),]
-osm_tiles_most = read_osm(bb(l_most, 4))
-tm_shape(osm_tiles_most) + tm_raster() +
-  tm_shape(l_most) + tm_lines(lwd = 10) +
-  tm_shape(lewes_uckfield) + tm_lines(lwd = 2, col = "black") 
+# osm_tiles_most = tmaptools::read_osm(tmaptools::bb(l_most, 4), raster = TRUE)
+# tm_shape(osm_tiles_most) + tm_raster() +
+#   tm_shape(l_most) + tm_lines(lwd = 10) +
+#   tm_shape(lewes_uckfield) + tm_lines(lwd = 2, col = "black") 
+# m = mapview(l_most, lwd = 5, color = "red") +
+#   mapview(lewes_uckfield, lwd = 1)
+# mapshot(m, file = "/home/robin/npct/infra-active/figures/perpmost.png")
+# library(magick)
+# magick::image_read("figures/perpmost.png")
+knitr::include_graphics("figures/perpmost.png")
 ```
 
 ## Cycling to Public Transport
@@ -378,20 +386,22 @@ for(j in 1:length(scens)){
   res_p = data.frame()
   for(i in lines_subset){
     l_lc$slc = l_lc[[scens[j]]]
-    df_tmp = l_lc@data[l_lc@data[[i]],]
+    df_tmp = st_set_geometry(l_lc[l_lc[[i]],], NULL)
     res_p = rbind(res_p, summarise(df_tmp,
                       `N. commuters` = sum(all),
                       `N. cycling` = round(sum(slc)),
                       `% cycling` = sum(slc) / sum(all) * 100,
-                      `Distance (km, Euclidean)` = mean(dist)
+                      `Distance (km, Euclidean)` = mean(rf_dist_km)
     ))
   }
   row.names(res_p) = paste(sc_name_df$sc_f_name[j], lines_subset)
   res = rbind(res, res_p)
 }
-# saveRDS(res, "input-data/res.Rds") # without stations data
-res = readRDS("input-data/res.Rds")
-res_stations = readRDS("input-data/res_stns.Rds")
+write_csv(res, "res.csv") # without stations data
+res = read_csv("res.csv")
+# res_stations = readRDS("../pct-team/input-data/res_stns.Rds")
+# write_csv(res_stations, "res_stns.csv")
+res_stations = read_csv("res_stns.csv")
 # sel_res = grepl(pattern = "11|Gov", rownames(res))
 # res_sub = res[sel_res,]
 res_sub = rbind(res[1:3,], res_stations[1,], res[4:6,], res_stations[2,])
@@ -412,14 +422,14 @@ Overall the potential for cycling along routes parallel to the track appears to 
 Under the ambitious Ebike scenario, the PCT shows that cycling potential along routes running parallel to the line is uneven geographically. Unsurprisingly, cycling potential is clustered at either end of the proposed route, with relatively high increases modelled along segments of the network between Lewes and Ringmer, along the A26 and along routes running north-south through Uckfield. This is shown in Figure \@ref(fig:pct-uck).
 
 ```{r pct-uck, fig.cap="Cycling potential (red lines) along the transport network between Lewes and Uckfield, under the Ebike scenario of the Propensity to Cycle Tool (see [pct.bike/east-sussex/](http://pct.bike/east-sussex/)).", fig.height=7}
-# knitr::include_graphics("figures/lewes-uckfield-pct-ebike.png")
-osm_tiles_local = read_osm(bb(buff))
-rnet = readRDS("../pct-data/east-sussex/rnet.Rds")
-rnet = rnet[buff,]
-tm_shape(osm_tiles_local) + tm_raster() +
-tm_shape(buff) + tm_borders(col = "blue", lwd = 3) +
-  tm_shape(rnet) + tm_lines(col = "red", lwd = "ebike_slc", scale = 20) +
-  tm_shape(lewes_uckfield) + tm_lines(lwd = 2, col = "black") 
+knitr::include_graphics("figures/lewes-uckfield-pct-ebike.png")
+# osm_tiles_local = read_osm(bb(buff))
+# rnet = readRDS("../pct-data/east-sussex/rnet.Rds")
+# rnet = rnet[buff,]
+# tm_shape(osm_tiles_local) + tm_raster() +
+# tm_shape(buff) + tm_borders(col = "blue", lwd = 3) +
+#   tm_shape(rnet) + tm_lines(col = "red", lwd = "ebike_slc", scale = 20) +
+#   tm_shape(lewes_uckfield) + tm_lines(lwd = 2, col = "black") 
 ```
 
 ## Potential for integation with public transport network
@@ -433,7 +443,7 @@ The results of the sub-setting and routing are show in \@ref(fig:segs)d, eight d
 It is notable that in \@ref(fig:segs)d not every station has an associated active travel route, this is because the new railway would not affect travel options evenly.
 
 ```{r stns, echo=FALSE, fig.cap="The potential for active travel to stations on the route network (red lines) and [", out.width= "60%"}
-knitr::include_graphics("infra-active/stations.png")
+knitr::include_graphics("figures/stations.png")
 ```
 
 ```{r stnsin, echo=FALSE, eval=FALSE}

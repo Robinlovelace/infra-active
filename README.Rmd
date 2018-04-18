@@ -155,41 +155,48 @@ Data on existing an potential future travel active travel patters was taken from
 <!-- # Cycling potential surrounding the Lewes-Uckfield trainline -->
 
 ```{r, echo=FALSE, warning=FALSE}
-# # Basic stats on Lewes-Uckfield route
-lewes_uckfield = readRDS("input-data/lewes_uckfield.Rds")
-lewes_uckfield_sf = sf::st_as_sf(lewes_uckfield)
-lewes_uckfield_osgb = spTransform(lewes_uckfield, CRS("+init=epsg:27700"))
-# gLength(lewes_uckfield_osgb) / 1000
-# z = readRDS("../pct-bigdata/ukmsoas-scenarios.Rds")
-# l = readRDS("../pct-bigdata/pct_lines_oneway_shapes.Rds")
-# l$`Percent cycling` = l$bicycle / l$all * 100
-# cents = geojsonio::geojson_read("../pct-bigdata/cents-scenarios.geojson", what = "sp")
-# 
-# # names(cents)
-# # Generate and save objects specific to the project (to save loading large datasets)
-# buff = buff_geo(lewes_uckfield, width = 10000)
-# proj4string(cents) = proj4string(lewes_uckfield)
-# cents_lc = cents[buff,]
-# z_lc = z[cents_lc,]
-# l_lc = l[buff,]
-# save(buff, cents_lc, z_lc, l_lc, file = "input-data/lewes_uckfield_objects.Rdata")
-load("input-data/lewes_uckfield_objects.Rdata")
-# plot(cents_lc)
-# sum(cents_lc$all)
+# Basic stats on Lewes-Uckfield route ----
+# lewes_uckfield = readRDS("../pct-team/input-data/lewes_uckfield.Rds")
+# lewes_uckfield_sf = sf::st_as_sf(lewes_uckfield)
+# write_sf(lewes_uckfield_sf, "../pct-team/input-data/lewes_uckfield.geojson")
+
+# access data data ----
+f = "lewes_uckfield_objects.Rdata"
+if(file.exists(f)) {
+  load(f)
+} else {
+  lewes_uckfield = read_sf("https://github.com/npct/pct-team/raw/master/input-data/lewes_uckfield.geojson")
+  z = read_sf("https://github.com/npct/pct-outputs-regional-notR/raw/master/commute/msoa/east-sussex/z.geojson")
+  l = read_sf("https://github.com/npct/pct-outputs-regional-notR/raw/master/commute/msoa/east-sussex/l.geojson")
+  cents = read_sf("https://github.com/npct/pct-outputs-regional-notR/raw/master/commute/msoa/east-sussex/c.geojson")
+  lewes_uckfield_osgb = st_transform(lewes_uckfield, 27700)
+  # st_length(lewes_uckfield_osgb) # 16 km
+  l$`Percent cycling` = l$bicycle / l$all * 100
+  # names(cents)
+  # Generate and save objects specific to the project (to save loading large datasets)
+  buff = geo_buffer(lewes_uckfield, dist = 10000)
+  plot(buff$geometry)
+  cents_lc = cents[buff,]
+  z_lc = z[cents_lc,]
+  l_lc = l[buff,]
+  save(buff, cents_lc, z_lc, l_lc, file = "lewes_uckfield_objects.Rdata")
+  # plot(cents_lc)
+  # sum(cents_lc$all)
+}
 ```
 
 There are `r nrow(cents_lc)` MSOAs whose population weighted centroids lie within a 10 km buffer of the train line, representing `r sum(cents_lc$all)` commuters. This area is illustrated in Figure \@ref(fig:lc).
 
 ```{r lc, fig.cap="Overview of the Lewes-Uckfield line with a 10 km buffer (blue). Width is proportional to the number of commutes; colour represents the proportion of people who cycle.", out.width="70%"}
-# osm_tiles = read_osm(bb(z_lc, 1.05), type = "stamen-toner")
-# saveRDS(osm_tiles, "data-sources/osm_tiles_ukfield.Rds")
-osm_tiles = readRDS("data-sources/osm_tiles_ukfield.Rds")
-qtm(osm_tiles) +
-  tm_shape(buff) + tm_borders(col = "blue", lwd = 3) +
-  tm_shape(l_lc) + tm_lines(lwd = "all", scale = 20, col = "Percent cycling", alpha = 0.5, n = 5, breaks = 2^(-1:4),
-                              palette = "Spectral", auto.palette.mapping = F, ) +
-  tm_shape(lewes_uckfield) + tm_lines(lwd = 5, col = "black") 
-# knitr::include_graphics("figures/lewes-uckfield-overview.png")
+# tmap_mode("view")
+# b = tmaptools::bb(l_lc, 1.8)
+# tm_shape(buff, bbox = b) + tm_borders(col = "blue", lwd = 3) +
+#   tm_shape(l_lc) +
+#   tm_lines(lwd = "all", scale = 20, col = "Percent cycling", alpha = 0.4, breaks = 2^(-1:4),
+#                               palette = "Spectral", auto.palette.mapping = F) +
+#   tm_shape(lewes_uckfield) + tm_lines(lwd = 5, col = "black") +
+#   tm_scale_bar()
+knitr::include_graphics("figures/lewes-uckfield-overview.png")
 ```
 
 The total number of single-stage commuters that pass through the buffer is higher: `r sum(l_lc$all)` commuters. As Figure \@ref(fig:lc) illustrates, however, many of these commuters are not travelling parallel to the train line.
@@ -198,10 +205,14 @@ Only a few hundred commuters pass directly parallel to the route, mostly of medi
 
 ## Cycling potential parallel to the route
 
-```{r gendata, echo=FALSE}
+```{r gendata, echo=FALSE, message=FALSE}
 # centre point subsetting
-l_cp = geo_projected(l_lc, fun = maptools::SpatialLinesMidPoints)
-sel_centrepoint = rgeos::gContains(buff, l_cp, byid = T)[,1]
+l_cp = as(l_lc, "Spatial") %>% 
+  geo_projected(., fun = maptools::SpatialLinesMidPoints) %>% 
+  st_as_sf()
+# sel_centrepoint = rgeos::gContains(buff, l_cp, byid = T)[,1]
+sel_centrepoint = st_contains(buff, l_cp, sparse = FALSE)[1, ]
+
 
 # Line bearing code
 l_a = line_bearing(lewes_uckfield)
@@ -209,27 +220,33 @@ a = angle_diff(l = l_lc, angle = l_a, bidirectional = TRUE)
 sel_para = a < 30
 
 # Parallel subsetting
-buff7 = buff_geo(lewes_uckfield, width = 5000)
-buff_small = buff_geo(lewes_uckfield, width = 2000)
-sel_centrepoint5 = rgeos::gContains(buff7, l_cp, byid = T)[,1]
-sel_smallbuff = !is.na(over(l_lc, buff_small))
+buff7 = geo_buffer(lewes_uckfield, dist = 5000)
+buff_small = geo_buffer(lewes_uckfield, dist = 2000)
+sel_centrepoint5 = st_contains(buff7, l_cp, sparse = FALSE)[1, ]
+sel_smallbuff = st_intersects(l_lc, buff_small, sparse = FALSE)[, 1]
+# sel_smallbuff = !is.na(over(l_lc, buff_small))
 sel_finalpar = sel_para & sel_centrepoint5 & sel_smallbuff
 l_lc$`Parallel selection` = sel_finalpar
 l_lc$`Touching buffer` = TRUE
 
 # Perpendicular lines
-# l_seg = line_segment(lewes_uckfield, segment_length = 1000)
-# saveRDS(l_seg, "data-sources/l_seg.Rds")
-l_seg = readRDS("data-sources/l_seg.Rds")
+l_seg = lewes_uckfield %>% as(., "Spatial") %>% 
+  line_segment(lewes_uckfield, segment_length = 1000) %>% 
+  st_as_sf(.)
+# saveRDS(l_seg, "l_seg.Rds")
+# l_seg = readRDS("data-sources/l_seg.Rds")
 l_lc$Perpendicular = a > 60
-sel_intersects = over(l_lc, l_seg)
-l_lc$`Perpendicular selection` = !is.na(sel_intersects[,1]) & a > 60
+sel_intersects = st_intersects(l_lc, l_seg) 
+# sum(sel_intersects[[1]])
+sel_intersects = map_lgl(sel_intersects, ~sum(.) > 0)
+l_lc$`Perpendicular selection` = sel_intersects & a > 60
 l_agg = aggregate(l_lc["govtarget_slc"], l_seg, FUN = sum)
 ```
 
 ### Subsetting desire lines by centre point proximity
 
 ```{r centre points, fig.cap="Illustration of the 'line centre point' subsetting method.", eval=FALSE}
+tmap_mode("plot")
 tm_shape(l_lc) + tm_lines(col = "grey", lwd = 3) +
 tm_shape(buff) + tm_borders(col = "blue", lwd = 3) +
   tm_shape(lewes_uckfield) + tm_lines(lwd = 5, col = "black") +

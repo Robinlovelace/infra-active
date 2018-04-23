@@ -14,7 +14,7 @@ pkgs = c("mapview", "tmap", "sf", "stplanr", "tidyverse")
 pkgs_installed = pkgs %in% installed.packages()
 pkgs_to_install = pkgs[!pkgs_installed]
 if(any(!pkgs_installed)) install.packages(pkgs)
-lapply(pkgs, library, character.only = T)
+purrr::map_lgl(pkgs, require, character.only = TRUE)
 ```
 
 # Abstract {-}
@@ -233,7 +233,7 @@ l_lc$`Touching buffer` = TRUE
 
 # Perpendicular lines
 l_seg = lewes_uckfield %>% as(., "Spatial") %>% 
-  line_segment(lewes_uckfield, segment_length = 1000) %>% 
+  line_segment(., segment_length = 1000) %>% 
   st_as_sf(.)
 # saveRDS(l_seg, "l_seg.Rds")
 # l_seg = readRDS("data-sources/l_seg.Rds")
@@ -399,9 +399,11 @@ for(j in 1:length(scens)){
 }
 write_csv(res, "res.csv") # without stations data
 res = read_csv("res.csv")
-# res_stations = readRDS("../pct-team/input-data/res_stns.Rds")
+if(!file.exists("res_stations.Rds")) {
+  download.file("https://github.com/npct/pct-team/raw/master/input-data/res_stns.Rds", "res_stns.Rds")
+}
+res_stations = readRDS("res_stns.Rds")
 # write_csv(res_stations, "res_stns.csv")
-res_stations = read_csv("res_stns.csv")
 # sel_res = grepl(pattern = "11|Gov", rownames(res))
 # res_sub = res[sel_res,]
 res_sub = rbind(res[1:3,], res_stations[1,], res[4:6,], res_stations[2,])

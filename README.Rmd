@@ -449,10 +449,16 @@ knitr::include_graphics("figures/stations.png")
 ```
 
 ```{r stnsin, echo=FALSE, eval=FALSE}
-l2stat = readRDS("input-data/l2stat.Rds")
-r2stat = readRDS("input-data/routes2station.Rds")
-l_short = readRDS("input-data/l_short.Rds")
-stops = readRDS("input-data/stops.Rds")
+if(!file.exists("l2stat.Rds")) {
+  download.file("https://github.com/npct/pct-team/raw/master/input-data/l2stat.Rds", "l2stat.Rds")
+  download.file("https://github.com/npct/pct-team/raw/master/input-data/routes2station.Rds", "routes2station.Rds")
+  download.file("https://github.com/npct/pct-team/raw/master/input-data/l_short.Rds", "l_short.Rds")
+  download.file("https://github.com/npct/pct-team/raw/master/input-data/stops.Rds", "stops.Rds")
+}
+l2stat = readRDS("l2stat.Rds")
+r2stat = readRDS("routes2station.Rds")
+l_short = readRDS("l_short.Rds")
+stops = readRDS("stops.Rds")
 tm_shape(l_lc) + tm_lines(col = "grey", lwd = 3) +
   tm_shape(stops) + tm_bubbles(col = "black", size = 0.2) +
   tm_shape(l_short) + tm_lines(lwd = 3, col = "green") +

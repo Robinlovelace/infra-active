@@ -1,5 +1,5 @@
 ---
-title: 'Methods for assessing the active travel impacts of major transport infrastructure projects'
+title: 'Geographic methods for assessing the active travel impacts of major transport infrastructure projects'
 # author: "Robin Lovelace, Malcolm Morgan"
 date: "`r Sys.Date()`"
 output:
@@ -209,7 +209,7 @@ Only a few hundred commuters pass directly parallel to the route, mostly of medi
 
 ```{r gendata, echo=FALSE, message=FALSE}
 # centre point subsetting
-l_cp = as(l_lc, "Spatial") %>% 
+l_cp = as_Spatial(l_lc) %>% 
   geo_projected(., fun = maptools::SpatialLinesMidPoints) %>% 
   st_as_sf()
 # sel_centrepoint = rgeos::gContains(buff, l_cp, byid = T)[,1]

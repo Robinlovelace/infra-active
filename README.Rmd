@@ -25,6 +25,7 @@ economic appraisal, cost-benefit analysis and environmental impact assessment.
 Recently other types of assessment have emerged, including, health, equality and transport impact assessment.
 <!-- This is well-documented: a growing academic literature reports methods and findings on the subject. -->
 <!-- Have you seen Health impact assessment of active transportation: A systematic review (2015), it would seem to undermin your assertion http://www.sciencedirect.com/science/article/pii/S0091743515001164 -->
+<!-- I'm not sure what you mean by transport impact assessment here - is this behaviour change? It might be worthwhile to clarify or remove -->
 However, there has been relatively little work focussing explicitly on active travel impacts, despite the high potential for new schemes to affect walking and cycling and the increased policy interest in these modes of transport in recent years.
 <!-- This can partly been explained by the lack of concepts, methods and precedents for estimating how new roads, railways and other projects are likely to affect walking and cycling levels. -->
 Motivated by the need to ensure active travel is accounted for, this paper sets out methods for active travel impact assessment, based on three types of impact.
@@ -37,10 +38,10 @@ A case study of a proposed railway, between Lewes and Uckfield in Essex, UK, dem
 
 # Introduction
 
-Major transport infrastructure projects are a major beneficiary of large-scale investment of public funding across the world. There are many reasons for this. Major projects such as new roads and railways are seen as an 'engine for growth', stimulating regional economic integration and the increased specialisation of labour, primarily through reduced travel times [@preston_economics_2013]. Secondary benefits may include the reduction of geographical inequalities [@liu_spatial_2016], a modal shift away from highly polluting modes (in the case of rail) [@dobruszkes_high-speed_2011], and improved quality of life [@fischerjamiemontague_quality_2011].
+Major transport infrastructure projects are a major <!-- remove double major --> beneficiary of large-scale investment of public funding across the world. There are many reasons for this. Major projects such as new roads and railways are seen as an 'engine for growth', stimulating regional economic integration and the increased specialisation of labour, primarily through reduced travel times [@preston_economics_2013]. Secondary benefits may include the reduction of geographical inequalities [@liu_spatial_2016], a modal shift away from highly polluting modes (in the case of rail <!-- i.e. a switch from private car to rail -->) [@dobruszkes_high-speed_2011], and improved quality of life [@fischerjamiemontague_quality_2011].
 
 In some cases, environmental arguments have been made for investment in transport infrastructure, despite the finding that increased transport connectivity tends to increase demand [@akerman_role_2011]. In practice, psychological and political factors may play an important role in explaining preferences for expenditure on major infrastructure in general, rather than revenue expenditure, e.g. on research and education which could boost economic growth through technological development and a more productive workforce [@flyvbjerg_policy_2005].
-
+<!-- This sentence on preferences on expenditure is a bit tricky to follow, it might be better to simply mention that 'a variety of different arguments/justifications are often put forward for new transport infrastructure including X, Y, and Z' -->
 Regardless of the diverse motivations for transport infrastructure investment, it is clear that they have and will continue to have major impacts. 
 There is a substantial body of literature dedicated to the evaluation of the impacts of transport infrastructure, which can be considered a sub-discipline in the field of transport studies in its own right.
 Despite the wide range of impacts incorporated in impact assessments, and the widening of assessments to incorporate social impacts [@jones_social_2012], active travel considerations are seldom taken into account, let alone analysed quantitatively.
@@ -75,7 +76,7 @@ There is a clear need for methods and concepts to encourage active travel impact
 "Major transport projects may promote or discourage physical activity in the form of walking and cycling", yet there has been very little quantitative *a posteriori* evaluation of past projects [@ogilvie_evaluating_2006], let alone *a priori* assessment of potential impacts. The present paper seeks to address this research and methodological gap, via geographical methods and emphasis on cycling potential.
 
 The lack of organisational overlap between major transport infrastructure and active travel interventions helps explain why the two are seldom considered. There has been very little research into the active travel impacts of major infrastructure projects. Yet, as we shall see in the next section, major transport infrastructure has the potential to have a wide range of impacts on transport behaviour overall and levels of active travel in particular. The purpose of this paper is to create a framework for the consideration of active travel impacts of major transport infrastructure. More importantly from a practitioner perspective, it outlines and demonstrates methods for assessing these impacts and prioritising interventions that will reduce the negative impacts on walking and cycling. The most radical option to minimise the active transport impacts of building large roads and railways is not to build them at all and invest in a series of smaller walking and cycling interventions instead. Arguments for doing this are discussed in the final section.
-
+<!-- I would remove this final sentence on the radical option - it sounds like you have an agenda which may cause some readers to think that the work is biased --> 
 # A typology of active transport impacts of major transport infrastructure projects
 
 Major infrastructure can impact upon active transport in a range of different ways. To organise the assessment process, these can be categorised into three broad types of impact, as illustrated in Figure \@ref(fig:type).
@@ -99,36 +100,36 @@ New linear infrastructure provides an opportunity to construct new footpaths and
 3) People taking journeys that are shorter than the gap between junctions/stations
 
 The number of people who are affected by these scenarios will depend on the type of infrastructure, its design, and the nature of the surrounding area. By analysing parallels, it can aid in understanding if an active travel route would be useful alongside on some or all of the new linear infrastructure.
-
+<!-- it might be worthwhile to note that it will also be affected by current and potential travel patterns - potential travel is something we cannot investigate easily though -->
 ## Integration of active travel and public transport
 
-New infrastructure can result in an increase in active travel  in nearby areas along the route. For example, a railway extension may result in more people walking or cycling in the centre of town to the local station which previously drove out of town to their destination. This effect can manifest at a substantial distance from the new infrastructure, by linking previously disconnected areas.
+New infrastructure can result in an increase in active travel in nearby areas along the route. For example, a railway extension may result in more people walking or cycling in the centre of town to access the rail network whereas they previously drove directly to their destination. This effect can manifest at a substantial distance from the new infrastructure, by linking previously disconnected areas.
 
 # Methodology
 
-A method for assessing each of the three types of active travel impact is outlined in this section in the abstract, such that it could be applied to any linear feature of interest. Then Section 4 provides specific examples using a case study of the Lewes-Uckfield train line.
+A method for assessing each of the three types of active travel impact is outlined in this section, such that it could be applied to any linear feature of interest. Once set out, the method is then applied to a specific example using a case study of the Lewes-Uckfield train line.
 The methods have been implemented as functions in the R package **stplanr** [@lovelace_stplanr:_2016].
 
 ## Potential cycling uptake along 'parallels'
 
-To identify parallels to linear features, a five stage methodology was developed.
+To identify parallels to linear features (i.e. a new road or rail line), a five stage methodology was developed.
 
 - Subset cycling desire lines^[
 A 'desire line' refers to a straight line connecting an origin-destination pair. In the context of this paper, which uses the outputs of the PCT version 1 as its input dataset, this means straight lines with a distance of 20 km or less connecting Middle Super Output Area population weighted centroids, with data on the number of people commuting in both directions. See @lovelace_propensity_2017 for further details.
-] to include only those in which the *centre point  of the line* passes close to the new infrastructure. This was set as 10 km for this paper.
+] to include only those in which the *centre point  of the line* passes close to the new infrastructure. This was set as 10 km buffer in this paper.
 - Break the linear infrastructure of interest into segments of even distance.
 - Calculate the angle of the segments and desire lines.
-- Subset the desire lines again, to include only those that are within a threshold angle (set at 30 degrees) of the mean bearing of their closest rail line segment.
+- Subset the desire lines again, to include only those that are within a threshold angle (set at 30 degrees) of the mean bearing of their closest infrastructure segment.
 - Aggregate the cycling potential of all parallel lines within the threshold distance of each segment and assign the values to the route segments.
-
+<!-- up until now, there hasn't been a mention of the PCT. We can either breifly set out what it is, or remove reference to it and simply state that the OD desire lines are derived from census commuting patterns -->
 ## Potential for severance
 
-Severance occurs when active travel along cyclable desire lines with high cycling potential is prevented or made more difficult by obstacles such as rivers, fast roads or railway tracks. A degree of severance can be expected along the full length of linear features, as most desire lines have at least some cycling potential. However, the degree of severance will be greatest in certain *severance pinch points* (henceforth referred to as severance points), for example, segments along a rail track which intersects desire lines connecting residential areas with employment zones on the other side.
+Severance occurs when active travel along cyclable desire lines with high cycling potential is prevented or made more difficult by obstacles such as rivers, fast roads or railway tracks. A degree of severance can be expected along the full length of linear infrastructures. However, the degree of severance will be greatest in certain *severance pinch points* (henceforth referred to as severance points), for example, segments along a rail track which intersects desire lines connecting residential areas with employment zones on the other side.
 
 The methodology used to identify the proposed route segments with highest potential to cause severance (assuming the transport infrastructure is new) consists of three stages:
 
 - Identify the desire lines which intersect with the infrastructure.
-- Quantify the number of potential cyclists blocked along segments of the infrastructure of even length.
+- Quantify the number of potential cyclists blocked along segments of the infrastructure of every segment.
 - Subset the segments which block the highest number of potential cyclists and identify potential crossing points.
 
 Note that based on the three-stage methodology outlined above, severance points are in fact more precisely described as 'severance segments', along which a range of points could be chosen for crossing points. However, the term 'severance point' is more intuitive, so we use this term throughout.
@@ -150,8 +151,8 @@ This method makes a number of simplifying assumptions that may or may not be val
 # A case study of Lewes-Uckfield
 
 The Lewes-Uckfield train line is a proposed project to restore a rail link between Uckfield and Lewes. This is part of wider plans to increase rail capacity in the area. As stated in the project brief, "Such infrastructure has the potential to support cycling if high-quality infrastructure is built alongside." This appendix analyses cycling potential along the proposed route, which is 16 km in length (see Figure \@ref(fig:lc)).
-
-Data on existing an potential future travel active travel patters was taken from the Propencity to Cycle Tool  [@lovelace_propensity_2017]. The data represents commuter travel between zones created for the 2011 census. These zones are known as Middle layer Super Ouput Areas (MSOA), and the population weighted centroids of each MSOA are used as the origin and destinations in this analysis.
+<!-- we'll need to provide more information on the case study - where exactly is it in terms of UK geography, length of new route, is it a terminal station etc. -->
+Data on existing an potential future active travel patterns was taken from the Propencity to Cycle Tool  [@lovelace_propensity_2017]. The data represents commuter travel between zones created for the 2011 census. These zones are known as Middle layer Super Ouput Areas (MSOA), and the population weighted centroids of each MSOA are used as the origin and destinations in this analysis.
 
 <!-- # Cycling potential surrounding the Lewes-Uckfield trainline -->
 

@@ -1,6 +1,6 @@
 ---
 title: 'Geographic methods for assessing the active travel impacts of major transport infrastructure projects'
-# author: "Robin Lovelace, Malcolm Morgan"
+author: "Robin Lovelace, Malcolm Morgan, Craig Morton, Anna Goodman"
 date: "`r Sys.Date()`"
 output:
     bookdown::pdf_document2:

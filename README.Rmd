@@ -2,11 +2,14 @@
 title: 'Geographic methods for assessing the active travel impacts of major transport infrastructure projects'
 author: "Robin Lovelace, Malcolm Morgan, Craig Morton, Anna Goodman"
 date: "`r Sys.Date()`"
+# output: md_document
 # output:
 #     bookdown::pdf_document2:
 #       keep_tex: true
 bibliography: references.bib
 ---
+
+<!-- Warning: modify the .Rmd file not the .md file -->
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = F, message = FALSE, fig.align = "center", fig.height = 4, options(scipen=999), out.width = "80%")
@@ -23,8 +26,10 @@ purrr::map_lgl(pkgs, require, character.only = TRUE)
 Major transport infrastructure projects affect many aspects of life.
 This is well known and sometimes acted on, thanks in part to well-established methods in 
 economic appraisal, cost-benefit analysis and environmental impact assessment.
-Recently other types of assessment have emerged, including health and equality impact assessment [@harris-roxas_differing_2011].
-There is an emerging literature focussing explicitly on active travel impacts, much of which seeks to evaluate the impacts of new schemes on walking [@mueller_health_2015].
+Recently other types of assessment have emerged, including health and equality impact assessment.
+<!-- [@harris-roxas_differing_2011]. -->
+There is an emerging literature focussing explicitly on active travel impacts, much of which seeks to evaluate the impacts of new schemes on walking.
+<!-- [@mueller_health_2015]. -->
 However, there is little in the way of methods for assessing likely impacts of new schemes *a-priori* in the literature reviewed, let alone geographic methods for assessing potential impacts based on potential levels of walking and cycling.
 
 Motivated by the need for accessible and scalable tools to assess active travel impacts of new developments, this paper sets out methods for active travel impact assessment.
@@ -34,28 +39,35 @@ It is based on the division of active travel impacts based on the geographic rel
 and *integration* with existing transport services, where new or different active travel options are unlocked by new infrastructure.
 A case study of a proposed railway, between Lewes and Uckfield in Essex, UK, demonstrates the methods' real world application.
 
-Cycling and Society abstract
+<!-- Cycling and Society abstract -->
 
-background, methodology, results and impact of the research
+<!-- background, methodology, results and impact of the research -->
 
-Motivated by the need for accessible and scalable tools to assess active travel impacts of new developments, this paper sets out methods for active travel impact assessment. It is based on the division of active travel impacts based on the geographic relations between the development and walking and cycling desire lines: Severance, when new infrastructure cuts across routes with high active travel potential; parallels, opportunities for constructing new routes parallel new infrastructure; and integration with existing transport services, where new or different active travel options are unlocked by new infrastructure. A case study of a proposed railway, between Lewes and Uckfield in Essex, UK, demonstrates the methods’ real world application.
+<!-- Motivated by the need for accessible and scalable tools to assess active travel impacts of new developments, this paper sets out methods for active travel impact assessment. It is based on the division of active travel impacts based on the geographic relations between the development and walking and cycling desire lines: Severance, when new infrastructure cuts across routes with high active travel potential; parallels, opportunities for constructing new routes parallel new infrastructure; and integration with existing transport services, where new or different active travel options are unlocked by new infrastructure. A case study of a proposed railway, between Lewes and Uckfield in Essex, UK, demonstrates the methods’ real world application. -->
 
-We find that the methods have the potential to identify and act on risks and opportunities associated with proposed developments down to road segment level.
-We conclude that new methods, such as those presented in this paper, have the potential to ensure that the impacts of major infrastructure projects on walking and cycling are properly accounted for before building begins.
+<!-- We find that the methods have the potential to identify and act on risks and opportunities associated with proposed developments down to road segment level. -->
+<!-- We conclude that new methods, such as those presented in this paper, have the potential to ensure that the impacts of major infrastructure projects on walking and cycling are properly accounted for before building begins. -->
 
 # Introduction
 
-Major transport infrastructure projects are a major <!-- remove double major --> beneficiary of large-scale investment of public funding across the world. There are many reasons for this. Major projects such as new roads and railways are seen as an 'engine for growth', stimulating regional economic integration and the increased specialisation of labour, primarily through reduced travel times [@preston_economics_2013]. Secondary benefits may include the reduction of geographical inequalities [@liu_spatial_2016], a modal shift away from highly polluting modes (in the case of rail <!-- i.e. a switch from private car to rail -->) [@dobruszkes_high-speed_2011], and improved quality of life [@fischerjamiemontague_quality_2011].
+Major transport infrastructure projects are a major beneficiary of large-scale investment of public funding worldwide.
+Justifications include economic growth [@preston_economics_2013], reduction of geographical inequalities [@liu_spatial_2016], modal shift (i.e. a switch from private car or flying to rail) [@dobruszkes_high-speed_2011], and improved quality of life due to reduced time spent travelling [@fischerjamiemontague_quality_2011] although, in practice, psychological and political factors (which tend to over-estimate benefits) are often deciding factors [@flyvbjerg_policy_2005; @cantarelli_characteristics_2012].
+In this context there have been calls to make the decision-making process more evidence-based [@hodge_publicprivate_2010], to account for environmental [e.g. @akerman_role_2011] and health [e.g. @mueller_health_2015] externalities.
+Improving the assessment of the latter impact is the focus of this paper.
 
-In some cases, environmental arguments have been made for investment in transport infrastructure, despite the finding that increased transport connectivity tends to increase demand [@akerman_role_2011].
-In practice other justifications, including social mobility and economic growth, are the deciding factor, however [@flyvbjerg_policy_2005].
-<!-- This sentence on preferences on expenditure is a bit tricky to follow, it might be better to simply mention that 'a variety of different arguments/justifications are often put forward for new transport infrastructure including X, Y, and Z' -->
-Regardless of the diverse motivations for transport infrastructure investment, it is clear that they have and will continue to have major impacts. 
-There is a substantial body of literature dedicated to the evaluation of the impacts of transport infrastructure, which can be considered a sub-discipline in the field of transport studies in its own right.
-Despite the wide range of impacts incorporated in impact assessments, and the widening of assessments to incorporate social impacts [@jones_social_2012], active travel considerations are seldom taken into account, let alone analysed quantitatively.
+<!-- Regardless of the diverse motivations for transport infrastructure investment, it is clear that they have and will continue to have major impacts.  -->
+<!-- There is a substantial body of literature dedicated to the evaluation of the impacts of transport infrastructure, which can be considered a sub-discipline in the field of transport studies in its own right. -->
+<!-- Despite the wide range of impacts incorporated in impact assessments, and the widening of assessments to incorporate social impacts [@jones_social_2012], active travel considerations are seldom taken into account, let alone analysed quantitatively. -->
 
-A recent review of impact assessment methods in the English context found that an increasingly wide range of methods and approaches were being used, including Environmental Impact Assessment (EIA), Strategic Environmental Assessment (SEA), Health Impact Assessment (HIA), Gender Impact Assessment (GIA) and Equality Impact Assessment (EqIA) [@tajima_should_2013].
-However, in that paper (and in much practitioner literature) no mention is made of potential impacts on walking and cycling, despite the well-known broad-ranging benefits of these active travel modes, that include:
+Impact Assessment (IA) is an established part of the decision-making process and active field of research which already provides a framework within which active transport impacts can be accounted for.
+A potential problem is that these impacts could be included in an increasingly wide range of IA frameworks, including Environmental Impact Assessment (EIA), Strategic Environmental Assessment (SEA), Health Impact Assessment (HIA), Gender Impact Assessment (GIA) and Equality Impact Assessment (EqIA) [@tajima_should_2013].
+Within this gammut of activity the methods in this paper clearly relate most closely to HIA, although in practice active transport could be included in any one of those IAs.
+EIA, for example, often includes a substantial health component and health is enshrined in the European Union Directive 2014/52/EU in impact assessment [@_directive_2014].
+
+Noting the increased prevalence of HIA in the overall IA process, @harris-roxas_differing_2011 provide an overview of this emerging field and propose a typology: mandated, decision-support, advocacy, and community-initiated HIAs.
+Noting this diversity, the methods designed in this paper are designed to be accessible for practitioners (and advocates) working on each type of HIA at zero cost --- the underlying code is open source [@R-stplanr].
+@harris-roxas_differing_2011 (and much work by HIA practitioners) cover a range of impacts but make no explicit reference of impacts on walking and cycling, despite the inevitable impacts of major projects on them and well-known benefits of these active travel modes.
+These include:
 
 - Increased life expectancy and physical well-being as a result of regular physical activity, estimated to have a major reduction of disability-adjusted life years lost due to non-communicable disease such as heart attacks [e.g. @gotschi_contrasts_2015].
 - Reduced energy use and associated improvements in environmental outcomes through a modal shift away from the motor car [@lovelace_assessing_2011].

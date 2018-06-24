@@ -2,9 +2,9 @@
 title: 'Geographic methods for assessing the active travel impacts of major transport infrastructure projects'
 author: "Robin Lovelace, Malcolm Morgan, Craig Morton, Anna Goodman"
 date: "`r Sys.Date()`"
-output:
-    bookdown::pdf_document2:
-      keep_tex: true
+# output:
+#     bookdown::pdf_document2:
+#       keep_tex: true
 bibliography: references.bib
 ---
 
@@ -15,6 +15,7 @@ pkgs_installed = pkgs %in% installed.packages()
 pkgs_to_install = pkgs[!pkgs_installed]
 if(any(!pkgs_installed)) install.packages(pkgs)
 purrr::map_lgl(pkgs, require, character.only = TRUE)
+# knitr::opts_chunk$set(eval = FALSE)
 ```
 
 # Abstract {-}
@@ -32,8 +33,15 @@ It is based on the division of active travel impacts based on the geographic rel
 *parallels*, opportunities for constructing new routes parallel new infrastructure;
 and *integration* with existing transport services, where new or different active travel options are unlocked by new infrastructure.
 A case study of a proposed railway, between Lewes and Uckfield in Essex, UK, demonstrates the methods' real world application.
-<!-- We find that the methods have the potential to identify and act on risks and opportunities associated with proposed developments down to road segment level. -->
-<!-- We conclude that new methods, such as those presented in this paper, have the potential to ensure that the impacts of major infrastructure projects on walking and cycling are properly accounted for before building begins. -->
+
+Cycling and Society abstract
+
+background, methodology, results and impact of the research
+
+Motivated by the need for accessible and scalable tools to assess active travel impacts of new developments, this paper sets out methods for active travel impact assessment. It is based on the division of active travel impacts based on the geographic relations between the development and walking and cycling desire lines: Severance, when new infrastructure cuts across routes with high active travel potential; parallels, opportunities for constructing new routes parallel new infrastructure; and integration with existing transport services, where new or different active travel options are unlocked by new infrastructure. A case study of a proposed railway, between Lewes and Uckfield in Essex, UK, demonstrates the methods’ real world application.
+
+We find that the methods have the potential to identify and act on risks and opportunities associated with proposed developments down to road segment level.
+We conclude that new methods, such as those presented in this paper, have the potential to ensure that the impacts of major infrastructure projects on walking and cycling are properly accounted for before building begins.
 
 # Introduction
 
@@ -67,7 +75,16 @@ Notably, the project found evidence of increased car use in areas affected by th
 
 When active travel considerations are taken into account, it is often so under sub-headings of health, air pollution, and other impacts, rather than as a self-standing category of impact in its own right. @cohen_health_2014 are unusual in mentioning active travel impacts of new transport infrastructure projects, but they do so under the sub-categories of physical health, mental health, transport inequalities and road safety. Active travel is mentioned in heading, but only as a sub-sub-heading within road safety: "Active travel and (mis)perceptions of danger". @joffe_framework_2002 provide a more representative example of the HIA literature: it has no mention of walking, cycling or active travel.
 
-There is a clear need for methods and concepts to encourage active travel impacts to be taken into account in the assessment of major infrastructure projects. At the risk of further diluting the impact assessment literature with more acronyms [see @tajima_should_2013] we tentatively refer to this aspect of impact assessment as Active Travel Impact Assessment (ATIA). Because of the scale of implications of worsening active travel conditions, health, environmental and social, we suggest that ATIA (or some alternative to it, perhaps building on the methods outlined in this paper or integrated into wider SEA) forms an integral part of future impact assessment research and applications. The remainder of this paper sets out methods for doing so and discusses the implications for major transport infrastructure plans.
+There is a clear need for methods and concepts to encourage active travel impacts to be taken into account in the assessment of major infrastructure projects. At the risk of further diluting the impact assessment literature with more acronyms [see @tajima_should_2013] we refer to this aspect of impact assessment as Active Travel Impact Assessment (ATIA), as a component of the wider process of HIA.
+Because active travel is central to health, environmental and social impacts, we suggest that ATIA 
+<!-- (or some alternative to it, perhaps building on the methods outlined in this paper or integrated into wider IA processes) -->
+is a vital component of health impacts.
+Despite the importance of active travel modes there are few tools for a-priori assessment and quantification of large infrastructure projects on them, positive and negative.
+
+One tool that has been developed specifically to explore active transport potential at regional to street levels (the geographic scope of many large transport infrastructure projects) is the Propensity to Cycle Tool (PCT) [@lovelace_propensity_2017].
+The PCT is a publicly accessible tool for exploring current cycling levels and the potential to growth, under a range of national scenarios (see [www.pct.bike](http://www.pct.bike/)).
+This prior work, and the fact that the PCT is open source, suggests the underlying methods --- geographic analysis of travel desire lines, routes and route networks --- could also be used for ATIA, but using local rather than global scenarios of change.
+Building on this context, the remainder of this paper sets out methods for doing so and discusses the implications for major transport infrastructure plans.
 
 <!-- ## Why is active travel omitted from IA? - commented out for now as not directly relevant -->
 <!-- Active transport lies at the opposite end of the spectrum of transport investment. Interventions that increase 'walkability' and 'cyclability' are usually (but not always or necessarily) smaller, cheaper and less disruptive than major infrastructure. They are often localised. They are often the responsibility of local transport authorities, whereas major infrastructure projects are almost always overseen by national transport departments or dedicated organisations reporting directly to central government. -->
@@ -94,16 +111,9 @@ Linear infrastructure can become a barrier to travel perpendicular to the new in
 
 ## Parallels
 
-New linear infrastructure provides an opportunity to construct new footpaths and cycle paths alongside the infrastructure. The marginal cost of adding active transport routes alongside other planned infrastructure can be lower than constructing a dedicated route.  There are several types of active transport that may take place along a parallel route:
-
-1) People who would have used the new infrastructure choose the active travel option instead;
-
-2) People starting or finishing a journey at a place that is near the linear infrastructure but does not have access to the infrastructure (due to a lack of station or junction). Use active travel for part of their journey to reach the nearest junction/station.
-
-3) People taking journeys that are shorter than the gap between junctions/stations.
-
-The number of people who are affected by these scenarios will depend on the type of infrastructure, its design, and the nature of the surrounding area. By analysing parallels, the method can aid in understanding if an active travel route would be useful alongside on some or all of the new linear infrastructure.
-Crucially, it not only accounts for existing active transport trips but the potential to generate new ones.
+New linear infrastructure provides an opportunity to construct new footpaths and cycle paths alongside the infrastructure. The marginal cost of adding active transport routes alongside other planned infrastructure will often be lower than constructing a dedicated route from scratch. Such new parallel footways and cycleways could encourage people to entirely replace existing trips by non-active modes.
+Furthermore parallels can encourage people to walk or cycle to the nearest junction/station, boosting the potential for integration (covered in the next section).
+The consideration of parallels encourages HIAs to explore not only the project's potential to affect current active transport trips but also the potential to generate new ones.
 
 ## Integration of active travel and public transport
 
@@ -192,7 +202,7 @@ if(file.exists(f)) {
 }
 ```
 
-There are `r nrow(cents_lc)` MSOAs whose population weighted centroids lie within a 10 km buffer of the train line, representing `r sum(cents_lc$all)` commuters. This area is illustrated in Figure \@ref(fig:lc).
+ There are `r # nrow(cents_lc)` MSOAs whose population weighted centroids lie within a 10 km buffer of the train line, representing `r # sum(cents_lc$all)` commuters. This area is illustrated in Figure \@ref(fig:lc). 
 
 ```{r lc, fig.cap="Overview of the Lewes-Uckfield line with a 10 km buffer (blue). Width is proportional to the number of commutes; colour represents the proportion of people who cycle.", out.width="70%"}
 # tmap_mode("view")
@@ -206,7 +216,7 @@ There are `r nrow(cents_lc)` MSOAs whose population weighted centroids lie withi
 knitr::include_graphics("figures/lewes-uckfield-overview.png")
 ```
 
-The total number of single-stage commuters that pass through the buffer is higher: `r sum(l_lc$all)` commuters. As Figure \@ref(fig:lc) illustrates, however, many of these commuters are not travelling parallel to the train line.
+The total number of single-stage commuters that pass through the buffer is higher: `r # sum(l_lc$all)` commuters. As Figure \@ref(fig:lc) illustrates, however, many of these commuters are not travelling parallel to the train line.
 The majority of desire lines intersecting the buffer are between Brighton (see the high density of flows in the far south-west of Figure \@ref(fig:lc)) and its surrounding settlements.
 Only a few hundred commuters pass directly parallel to the route, mostly of medium distance from 10 to 20 km (route distance) between MSOAs in Lewes, Ringmer, and Uckfield. This implies that cycle paths running parallel to the train line itself have relatively low commuter cycling potential.
 
@@ -262,7 +272,7 @@ tm_shape(buff) + tm_borders(col = "blue", lwd = 3) +
 ```
 
 The centre points of the desire lines intersecting with the Lewes-Uckfield route buffer are presented in Figure \@ref(fig:metafigure)a.
-These represent `r round(sum(sel_centrepoint)/length(sel_centrepoint) * 100, 1)`% of the desire lines in the study area, defined by the 10 km buffer.
+These represent `r # round(sum(sel_centrepoint)/length(sel_centrepoint) * 100, 1)`% of the desire lines in the study area, defined by the 10 km buffer.
 
 ```{r metafigure, echo=FALSE, fig.cap="The centre point-buffer (a), parallel (b), perpendicular (c) and station access (d) methods of subsetting desire lines affected by the new rail line. In all figures, the subsetted lines are plotted in red. In (b) the updated parallel desire lines, whose centre points lie within 5 km of the route, are illustrated in orange."}
 knitr::include_graphics("figures/infra-selection-all.png")

@@ -35,7 +35,7 @@ However, there is little in the way of methods for assessing likely impacts of n
 Motivated by the need for accessible and scalable tools to assess active travel impacts of new developments, this paper sets out methods for active travel impact assessment.
 It is based on the division of active travel impacts based on the geographic relations between the development and walking and cycling desire lines:
 *Severance*, when new infrastructure cuts across routes with high active travel potential;
-*parallels*, opportunities for constructing new routes parallel new infrastructure;
+*parallels*, opportunities for constructing active travel features parallel to new infrastructure;
 and *integration* with existing transport services, where new or different active travel options are unlocked by new infrastructure.
 A case study of a proposed railway, between Lewes and Uckfield in Essex, UK, demonstrates the methods' real world application.
 
@@ -50,8 +50,8 @@ A case study of a proposed railway, between Lewes and Uckfield in Essex, UK, dem
 
 # Introduction
 
-Major transport infrastructure projects are a major beneficiary of large-scale investment of public funding worldwide.
-Justifications include economic growth [@preston_economics_2013], reduction of geographical inequalities [@liu_spatial_2016], modal shift (i.e. a switch from private car or flying to rail) [@dobruszkes_high-speed_2011], and improved quality of life due to reduced time spent travelling [@fischerjamiemontague_quality_2011] although, in practice, psychological and political factors (which tend to over-estimate benefits) are often deciding factors [@flyvbjerg_policy_2005; @cantarelli_characteristics_2012].
+Major transport infrastructure projects are a beneficiary of large-scale investment of public funding worldwide.
+Justifications include economic growth [@preston_economics_2013], reduction of geographical inequalities [@liu_spatial_2016], modal shift (i.e. a switch from private car or flying to rail) [@dobruszkes_high-speed_2011], and improved quality of life due to reduced time spent travelling [@fischerjamiemontague_quality_2011].In practice, psychological and political factors (which tend to over-estimate benefits) are often the deciding factors [@flyvbjerg_policy_2005; @cantarelli_characteristics_2012].
 In this context there have been calls to make the decision-making process more evidence-based [@hodge_publicprivate_2010], to account for environmental [e.g. @akerman_role_2011] and health [e.g. @mueller_health_2015] externalities.
 Improving the assessment of the latter impact is the focus of this paper.
 
@@ -59,7 +59,7 @@ Improving the assessment of the latter impact is the focus of this paper.
 <!-- There is a substantial body of literature dedicated to the evaluation of the impacts of transport infrastructure, which can be considered a sub-discipline in the field of transport studies in its own right. -->
 <!-- Despite the wide range of impacts incorporated in impact assessments, and the widening of assessments to incorporate social impacts [@jones_social_2012], active travel considerations are seldom taken into account, let alone analysed quantitatively. -->
 
-Impact Assessment (IA) is an established part of the decision-making process and active field of research which already provides a framework within which active transport impacts can be accounted for.
+Impact Assessment (IA) is an established part of the decision-making process and an active field of research which already provides a framework within which active transport impacts can be accounted for.
 A potential problem is that these impacts could be included in an increasingly wide range of IA frameworks, including Environmental Impact Assessment (EIA), Strategic Environmental Assessment (SEA), Health Impact Assessment (HIA), Gender Impact Assessment (GIA) and Equality Impact Assessment (EqIA) [@tajima_should_2013].
 Within this gammut of activity the methods in this paper clearly relate most closely to HIA, although in practice active transport could be included in any one of those IAs.
 EIA, for example, often includes a substantial health component and health is enshrined in the European Union Directive 2014/52/EU in impact assessment [@_directive_2014].
@@ -79,10 +79,10 @@ These include:
 <!-- *Environmental impact assessment* ... -->
 
 Of existing impact assessment approaches, HIA and TIA have the most obvious links to active travel. Even when these additional assessment exercises are undertaken, or when they are amalgamated with the wider process of Strategic Environmental Assessment (SEA) [@tajima_should_2013], active travel impacts are rarely considered, let alone quantified. This has been noted in the context of road building schemes: "there is very little empirical data on the impact of road transport interventions", aside from injury reduction estimates [@thomson_assessing_2008].
-
+<!--  I can't see where TIA is defined, plus SEA is already defined -->
 Since then there has been an increase in the research attention focussed on the wider impacts of road construction, inluding
 A notable research project in this area is [Traffic and Health in Glasgow](http://www.cedar.iph.cam.ac.uk/research/directory/traffic-health-glasgow/) which analysed the impacts of an extension to the M74 motorway in 2011.
-This project has has resulted in numerous findings, including evidence of reduced levels of physical activity among participants who live in close proximity to the motorway [@prins_effects_2017].
+This project has resulted in numerous findings, including evidence of reduced levels of physical activity among participants who live in close proximity to the motorway [@prins_effects_2017].
 Notably, the project found evidence of increased car use in areas affected by the new road, although no evidence of active travel impacts was identified [@foley_effects_2017].
 
 When active travel considerations are taken into account, it is often so under sub-headings of health, air pollution, and other impacts, rather than as a self-standing category of impact in its own right. @cohen_health_2014 are unusual in mentioning active travel impacts of new transport infrastructure projects, but they do so under the sub-categories of physical health, mental health, transport inequalities and road safety. Active travel is mentioned in heading, but only as a sub-sub-heading within road safety: "Active travel and (mis)perceptions of danger". @joffe_framework_2002 provide a more representative example of the HIA literature: it has no mention of walking, cycling or active travel.
@@ -123,7 +123,7 @@ Linear infrastructure can become a barrier to travel perpendicular to the new in
 
 ## Parallels
 
-New linear infrastructure provides an opportunity to construct new footpaths and cycle paths alongside the infrastructure. The marginal cost of adding active transport routes alongside other planned infrastructure will often be lower than constructing a dedicated route from scratch. Such new parallel footways and cycleways could encourage people to entirely replace existing trips by non-active modes.
+New linear infrastructure provides an opportunity to construct new foot and cycle paths alongside the infrastructure. The marginal cost of adding active transport routes alongside other planned infrastructure will often be lower than constructing a dedicated route from scratch. Such new parallel footways and cycleways could encourage people to entirely replace existing trips by non-active modes.
 Furthermore parallels can encourage people to walk or cycle to the nearest junction/station, boosting the potential for integration (covered in the next section).
 The consideration of parallels encourages HIAs to explore not only the project's potential to affect current active transport trips but also the potential to generate new ones.
 
@@ -135,7 +135,7 @@ New infrastructure can result in an increase in active travel in nearby areas al
 
 A method for assessing each of the three types of active travel impact is outlined in this section, such that it could be applied to any linear feature of interest. Once set out, the method is then applied to a specific example using a case study of the Lewes-Uckfield train line.
 The methods have been implemented as functions in the R package **stplanr** [@lovelace_stplanr:_2016].
-
+<!-- I'd recommend that we keep a consistent order: severance - parallels - integration --> 
 ## Potential cycling uptake along 'parallels'
 
 To identify parallels to linear features (i.e. a new road or rail line), a five stage methodology was developed.
@@ -147,7 +147,7 @@ A 'desire line' refers to a straight line connecting an origin-destination pair.
 - Calculate the angle of the segments and desire lines.
 - Subset the desire lines again, to include only those that are within a threshold angle (set at 30 degrees) of the mean bearing of their closest infrastructure segment.
 - Aggregate the cycling potential of all parallel lines within the threshold distance of each segment and assign the values to the route segments, based on methods set-out in [@lovelace_propensity_2017].
-
+<!-- it might be worwthile to breifly define what is meant by a subset - some readers may not be aware of this technique --> 
 ## Potential for severance
 
 Severance occurs when active travel along cyclable desire lines with high cycling potential is prevented or made more difficult by obstacles such as rivers, fast roads or railway tracks. A degree of severance can be expected along the full length of linear infrastructures. However, the degree of severance will be greatest in certain *severance pinch points* (henceforth referred to as severance points), for example, segments along a rail track which intersects desire lines connecting residential areas with employment zones on the other side.
@@ -165,7 +165,7 @@ Note that based on the three-stage methodology outlined above, severance points 
 Increased travel to public transport is likely to occur near public transport stops and on desire lines that have an origin and destination near connected public transport nodes (typically bus stops or train stations).
 The methodology used to estimate the potenial uptake of cycling due to integration with new public transport services associated with the new route assumes that new nodes have suitable provision for cycling, with safe routes to get there and sufficient cycle parking spaces, and consists of the following stages:
 
-- Subset trips that could feasibly use public transport in terms of boarding and alighting, by subsetting those with both origin and destination within a given distance a planned station/stop.
+- Subset trips that could feasibly use public transport in terms of boarding and alighting, by subsetting those with both origin and destination within a given distance of a planned station/stop.
 - Remove lines that have the same stop as their closest origin and destination.
 - Remove lines which are linked by existing public transport, thus will not change with the new linear infrastructure.
 - Create new desire lines and routes that are from Origin/Destinations to public transport.
@@ -176,7 +176,7 @@ This method makes a number of simplifying assumptions that may or may not be val
 
 # A case study of Lewes-Uckfield
 
-The Lewes-Uckfield train line is a proposed project to restore a rail link between Uckfield and Lewes. This is part of wider plans to increase rail capacity in the area. As stated in the project brief, "Such infrastructure has the potential to support cycling if high-quality infrastructure is built alongside." This appendix analyses cycling potential along the proposed route, which is 16 km in length (see Figure \@ref(fig:lc)).
+The Lewes-Uckfield train line is a proposed project to restore a rail link between Uckfield and Lewes on the south coast of England. This is part of wider plans to increase rail capacity in the area. As stated in the project brief, "Such infrastructure has the potential to support cycling if high-quality infrastructure is built alongside." This appendix analyses cycling potential along the proposed route, which is 16 km in length (see Figure \@ref(fig:lc)).
 <!-- we'll need to provide more information on the case study - where exactly is it in terms of UK geography, length of new route, is it a terminal station etc. -->
 Data on existing an potential future active travel patterns was taken from the Propencity to Cycle Tool  [@lovelace_propensity_2017]. The data represents commuter travel between zones created for the 2011 census. These zones are known as Middle layer Super Ouput Areas (MSOA), and the population weighted centroids of each MSOA are used as the origin and destinations in this analysis.
 
@@ -229,7 +229,7 @@ knitr::include_graphics("figures/lewes-uckfield-overview.png")
 ```
 
 The total number of single-stage commuters that pass through the buffer is higher: `r # sum(l_lc$all)` commuters. As Figure \@ref(fig:lc) illustrates, however, many of these commuters are not travelling parallel to the train line.
-The majority of desire lines intersecting the buffer are between Brighton (see the high density of flows in the far south-west of Figure \@ref(fig:lc)) and its surrounding settlements.
+The majority of desire lines intersecting the buffer are between Brighton (the largest city in the region - see the high density of flows in the far south-west of Figure \@ref(fig:lc)) and its surrounding settlements.
 Only a few hundred commuters pass directly parallel to the route, mostly of medium distance from 10 to 20 km (route distance) between MSOAs in Lewes, Ringmer, and Uckfield. This implies that cycle paths running parallel to the train line itself have relatively low commuter cycling potential.
 
 ## Cycling potential parallel to the route
@@ -294,7 +294,7 @@ knitr::include_graphics("figures/infra-selection-all.png")
 
 Because the Lewes-Uckfield line is short and relatively straight, we used the entire line as a single segment.
 However, if the line were to be broken into segments, the results would resemble Figure \@ref(fig:segs)a. This demonstration of the method could be applied to larger and more complex routes, e.g. that of the proposed HS2 or HS2 cycle network route.
-
+<!-- this is the first time HS2 is mentioned - we'll need to either define what it is or remove it -->
 <!-- 
 ```{r segments, fig.cap="Demonstration of the method for splitting the route into segments (a) ", out.height="7cm", eval=FALSE}
 knitr::include_graphics("figures/lewes-uckfield-segments.png")
@@ -363,7 +363,7 @@ tm_shape(l_lc) + tm_lines(col = "grey", lwd = 3) +
 ### Quantifying severance per segments of the train line
 
 The cycling potential of the intersecting 'perpendicular' lines was then summed *per 1 km segment* of the rail line. The results, for the Government Target scenario, are presented in \@ref(fig:segs)b which shows, as one would expect, that severance impacts would be greatest at the ends of the proposed route, where population densities and employment opportunities are greatest.
-
+<!-- what is the 'Government Target scenario'? - either define or remove --> 
 ```{r perpagg, fig.cap="Total cycling potential (under the Government Target scenario) 'severed' by the proposed rail line. Line width is proportional to the square root of the total cycling potential for each segment.", fig.height=5, eval=FALSE}
 plot(l_agg, lwd = sqrt(l_agg$govtarget_slc) * 2)
 ```
@@ -390,7 +390,7 @@ knitr::include_graphics("figures/perpmost.png")
 
 Beyond direct impacts of the proposed scheme on cycling potential, associated with desire lines in parallel with and crossing perpendicular to the railway, there are indirect impacts created by the potential to cycle to the stations[@flamm_public_2014] . Because the proposed rail stations are located in areas of high population density, this could generate new cycle trips when they are taken as part of a multi-stage trip (e.g. cycle to the rail station, catch the train towards work, walk from the 'activity end' rail station to work).
 
-Analysis of the OD data in relation to proposed rail station locations suggests that relatively few desire lines, representing 2351 commuters, currently commute between areas served by the new rail stations, within a 3 km buffer (see \@ref(fig:metafigure)d).
+Analysis of the origin-destination data in relation to proposed rail station locations suggests that relatively few desire lines, representing 2351 commuters, currently commute between areas served by the new rail stations, within a 3 km buffer (see \@ref(fig:metafigure)d).
 The main beneficiaries in the local area would be people north of Uckfield commuting to Lewes and vice versa.  Desire lines between Lewes and Brighton can use the existing railway, while there are no desire lines between Brighton and North of Uckfield. The lack of desire lines likely reflects the current transport network's lack of connectivity between Lewes and Uckfield.  
 Changes in travel patterns caused by new rail links are beyond the scope of this paper. However, the method outlined above could be combined with existing techniques to understand the mode shift to rail, and thus predict any cycling increase resulting from a change in rail connectivity.
 
@@ -465,7 +465,7 @@ knitr::include_graphics("figures/lewes-uckfield-pct-ebike.png")
 
 The method we used to estimate the potential uptake in active travel resulting from walking and cycling to and from public transport stops was undertaken in three stages:
 
-first stage in estimating the cycling  people who may use active travel to reach a station is to identify those who wish to travel between two stations. This is done by selecting desire lines, which have both origin and destination within 3km of a station.  From this subset of desire lines, any which have the same station as the closest to both origin and destination are excluded. Finally, lines between stations that are already connected by the existing rail network are removed, as these routes will not be changed by the new Lewes-Uckfield Line, thus travel patterns in these areas are likely to remain the same.
+first stage in estimating the cycling people who may use active travel to reach a station is to identify those who wish to travel between two stations. This is done by selecting desire lines, which have both origin and destination within 3km of a station.  From this subset of desire lines, any which have the same station as the closest to both origin and destination are excluded. Finally, lines between stations that are already connected by the existing rail network are removed, as these routes will not be changed by the new Lewes-Uckfield Line, thus travel patterns in these areas are likely to remain the same.
 
 Having identified the desire lines and their corresponding stations, it is possible to calculate routes from each origin/destination to the nearest station.  In this case, the cyclestreets.net routing algorithm was used.
 The results of the sub-setting and routing are show in \@ref(fig:segs)d, eight desire lines were identified (green) representing 574 commuters.  Their associated active travel routes are shown in red.  Calculating the increase in active travellers along these routes would be dependent on the number of commuters switching to the new railway after it was constructed.  However, even without a precise quantification the mode shift, the method highlights which areas may have increased active travel.

@@ -138,6 +138,19 @@ New infrastructure can result in an increase in active travel in nearby areas al
 A method for assessing each of the three types of active travel impact is outlined in this section, such that it could be applied to any linear feature of interest. Once set out, the method is then applied to a specific example using a case study of the Lewes-Uckfield train line.
 The methods have been implemented as functions in the R package **stplanr** [@lovelace_stplanr:_2016].
 <!-- I'd recommend that we keep a consistent order: severance - parallels - integration --> 
+
+## Potential for severance
+
+Severance occurs when active travel along cyclable desire lines with high cycling potential is prevented or made more difficult by obstacles such as rivers, fast roads or railway tracks. A degree of severance can be expected along the full length of linear infrastructures. However, the degree of severance will be greatest in certain *severance pinch points* (henceforth referred to as severance points), for example, segments along a rail track which intersects desire lines connecting residential areas with employment zones on the other side.
+
+The methodology used to identify the proposed route segments with highest potential to cause severance (assuming the transport infrastructure is new) consists of three stages:
+
+- Identify the desire lines which intersect with the infrastructure.
+- Quantify the number of potential cyclists blocked along segments of the infrastructure of every segment.
+- Subset the segments which block the highest number of potential cyclists and identify potential crossing points.
+
+Note that based on the three-stage methodology outlined above, severance points are in fact more precisely described as 'severance segments', along which a range of points could be chosen for crossing points. However, the term 'severance point' is more intuitive, so we use this term throughout.
+
 ## Potential cycling uptake along 'parallels'
 
 To identify parallels to linear features (i.e. a new road or rail line), a five stage methodology was developed.
@@ -150,17 +163,6 @@ A 'desire line' refers to a straight line connecting an origin-destination pair.
 - Subset the desire lines again, to include only those that are within a threshold angle (set at 30 degrees) of the mean bearing of their closest infrastructure segment.
 - Aggregate the cycling potential of all parallel lines within the threshold distance of each segment and assign the values to the route segments, based on methods set-out in [@lovelace_propensity_2017].
 <!-- it might be worwthile to breifly define what is meant by a subset - some readers may not be aware of this technique --> 
-## Potential for severance
-
-Severance occurs when active travel along cyclable desire lines with high cycling potential is prevented or made more difficult by obstacles such as rivers, fast roads or railway tracks. A degree of severance can be expected along the full length of linear infrastructures. However, the degree of severance will be greatest in certain *severance pinch points* (henceforth referred to as severance points), for example, segments along a rail track which intersects desire lines connecting residential areas with employment zones on the other side.
-
-The methodology used to identify the proposed route segments with highest potential to cause severance (assuming the transport infrastructure is new) consists of three stages:
-
-- Identify the desire lines which intersect with the infrastructure.
-- Quantify the number of potential cyclists blocked along segments of the infrastructure of every segment.
-- Subset the segments which block the highest number of potential cyclists and identify potential crossing points.
-
-Note that based on the three-stage methodology outlined above, severance points are in fact more precisely described as 'severance segments', along which a range of points could be chosen for crossing points. However, the term 'severance point' is more intuitive, so we use this term throughout.
 
 ## Potential for cycling and public transport integration
 
@@ -267,6 +269,7 @@ l_lc$`Touching buffer` = TRUE
 l_seg = lewes_uckfield %>% as(., "Spatial") %>% 
   line_segment(., segment_length = 1000) %>% 
   st_as_sf(.)
+
 # saveRDS(l_seg, "l_seg.Rds")
 # l_seg = readRDS("data-sources/l_seg.Rds")
 l_lc$Perpendicular = a > 60

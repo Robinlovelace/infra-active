@@ -1,0 +1,203 @@
+---
+title: 'Severance, parallels and integration'
+subtitle: "🚗🚌🚲🚶<br/>methods for assessing the active travel impacts of major transport infrastructure projects"
+author: "Robin Lovelace, Malcolm Morgan, Craig Morton, Anna Goodman"
+date: "Cycling and Society, Bristol<br> `r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+widescreen: true
+bibliography: references.bib
+---
+
+<!-- The background of this research is the huge impact major transport infrastructure projects such as HS2 will have on walking and cycling and the lack of evidence and established methodologies for estimating such impacts before work begins. Large infrastructure projects affect many aspects of life and there are well-established methods in economic appraisal, cost-benefit analysis and environmental impact assessment. Recently other types of assessment have emerged, including health and equality impact assessment. There is an emerging literature focussing explicitly on active travel impacts, much of which seeks to evaluate the impacts of new schemes on walking. However, there is little in the way of methods for assessing likely impacts of new schemes a-priori, let alone reproducible methods for assessing potential impacts before they arise. -->
+<!-- Motivated by the need for accessible and scalable tools to assess active travel impacts of new developments, this paper sets out methods for active travel impact assessment. It is based on the division of active travel impacts based on the geographic relations between the development and walking and cycling desire lines: Severance, when new infrastructure cuts across routes with high active travel potential; parallels, opportunities for constructing new routes parallel new infrastructure; and integration with existing transport services, where new or different active travel options are unlocked by new infrastructure.  -->
+<!-- We find that the methods have the potential to identify and act on risks and opportunities associated with proposed developments down to road segment level. We conclude that new methods, such as those presented in this paper, have the potential to ensure that the impacts of major infrastructure projects on walking and cycling are properly accounted for before building begins. -->
+
+```{r setup, include = FALSE}
+options(htmltools.dir.version = FALSE)
+library(RefManageR)
+BibOptions(check.entries = FALSE, 
+           bib.style = "authoryear", 
+           cite.style = 'alphabetic', 
+           style = "markdown",
+           first.inits = FALSE,
+           hyperlink = FALSE, 
+           dashed = FALSE)
+my_bib = ReadBib("references.bib", check = FALSE)
+```
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = F, message = FALSE, fig.align = "center", fig.height = 4, options(scipen=999), out.width = "80%")
+pkgs = c("mapview", "tmap", "sf", "stplanr", "tidyverse")
+pkgs_installed = pkgs %in% installed.packages()
+pkgs_to_install = pkgs[!pkgs_installed]
+if(any(!pkgs_installed)) install.packages(pkgs)
+purrr::map_lgl(pkgs, require, character.only = TRUE)
+# knitr::opts_chunk$set(eval = FALSE)
+f = "lewes_uckfield_objects.Rdata"
+load(f)
+lewes_uckfield = read_sf("lewes_uckfield.geojson")
+```
+
+```{r gendata, echo=FALSE, message=FALSE}
+# centre point subsetting
+l_cp = as_Spatial(l_lc) %>% 
+  geo_projected(., fun = maptools::SpatialLinesMidPoints) %>% 
+  st_as_sf()
+# sel_centrepoint = rgeos::gContains(buff, l_cp, byid = T)[,1]
+sel_centrepoint = st_contains(buff, l_cp, sparse = FALSE)[1, ]
+
+
+# Line bearing code
+l_a = line_bearing(lewes_uckfield)
+a = angle_diff(l = l_lc, angle = l_a, bidirectional = TRUE)
+sel_para = a < 30
+
+# Parallel subsetting
+buff7 = geo_buffer(lewes_uckfield, dist = 5000)
+buff_small = geo_buffer(lewes_uckfield, dist = 2000)
+sel_centrepoint5 = st_contains(buff7, l_cp, sparse = FALSE)[1, ]
+sel_smallbuff = st_intersects(l_lc, buff_small, sparse = FALSE)[, 1]
+# sel_smallbuff = !is.na(over(l_lc, buff_small))
+sel_finalpar = sel_para & sel_centrepoint5 & sel_smallbuff
+l_lc$`Parallel selection` = sel_finalpar
+l_lc$`Touching buffer` = TRUE
+
+# Perpendicular lines
+l_seg = lewes_uckfield %>% as(., "Spatial") %>% 
+  line_segment(., segment_length = 1000) %>% 
+  st_as_sf(.)
+
+# saveRDS(l_seg, "l_seg.Rds")
+# l_seg = readRDS("data-sources/l_seg.Rds")
+l_lc$Perpendicular = a > 60
+sel_intersects = st_intersects(l_lc, l_seg) 
+# sum(sel_intersects[[1]])
+sel_intersects = map_lgl(sel_intersects, ~sum(.) > 0)
+l_lc$`Perpendicular selection` = sel_intersects & a > 60
+l_agg = aggregate(l_lc["govtarget_slc"], l_seg, FUN = sum)
+```
+
+## Contents
+
+- Context
+- The impacts of transport infrastructure
+- Methods
+- Results and discussion
+
+---
+ 
+## Research context
+
+
+
+- Work funded as part of the Propensity to Cycle Too  (PCT) project
+- Focus: map spatial distribution of potential for cycling growth
+- At a national scale
+
+---
+
+## Academic context
+
+- Much research into 'where to build'
+
+--
+
+- But little that is systematic/objective/reproducible
+
+--
+
+- Very little at 'route network' level  `r Citep(my_bib, "buehler_bikeway_2016", .opts = list(cite.style = "authoryear"))`
+
+--
+
+```{r, echo=FALSE, message=FALSE}
+dft = readr::read_csv("cycle-tools-wide.csv")
+dft$Tool = gsub("Permeability Assessment Tool", "PAT", dft$Tool)
+knitr::kable(dft %>% select(Tool, Coverage, `Public access`, Level = `Levels of analysis`), format = "html")
+```
+
+---
+
+## Central concept: desire lines
+
+```{r, echo=FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/npct/pct-team/master/flow-model/od-data-leeds.png")
+```
+
+--
+
+- Origin-destination can be mapped as 'desire lines'
+- Cycling desire lines will shift with cycling uptake `r Citep(my_bib, "lovelace_propensity_2017", .opts = list(cite.style = "authoryear"))`
+
+---
+
+## Scenario shift in network load (source: [pct.bike](http://pct.bike/m/?r=avon))
+
+```{r, echo=FALSE, fig.show='hold'}
+# knitr::include_graphics("https://raw.githubusercontent.com/npct/pct-team/master/flow-model/leeds-rnet-gov-go.png")
+knitr::include_graphics(c(
+  "https://raw.githubusercontent.com/npct/pct-team/master/figures/rnet-lsoa-avon-clc.png",
+  "https://raw.githubusercontent.com/npct/pct-team/master/figures/rnet-lsoa-avon-dutch.png"
+))
+```
+
+---
+
+## Limitations
+
+- No account of future developments
+
+--
+
+- Currently limited to commuter cycling (funding to add schools)
+
+--
+
+- No integration with other transport modes
+
+--
+
+- Little account of existing/future infrastructure
+
+---
+
+## Policy context
+
+```{r}
+webshot::webshot("https://www.theguardian.com/environment/bike-blog/2018/jul/18/hs2-accused-of-breaching-cycle-crossing-commitments-along-high-speed-route")
+```
+
+---
+
+## The scale of HS2
+
+```{r}
+hs21 = read_sf("https://github.com/npct/pct-team/raw/master/input-data/hs21.geojson")
+hs22 = read_sf("https://github.com/npct/pct-team/raw/master/input-data/hs22.geojson")
+mhs2 = tm_shape(hs21) +
+  tm_lines(col = "blue", lwd = 3) +
+  tm_shape(hs22) +
+  tm_lines(col = "red", lwd = 3)
+tmap_leaflet(mhs2)
+```
+
+
+
+---
+
+## Thanks, Links, References
+
+To use the tools presented, see:
+
+- www.pct.bike
+- www.cyipt.bike
+
+```{r, 'refs', results="asis", echo=FALSE}
+PrintBibliography(my_bib)
+# RefManageR::WriteBib(my_bib, "refs-geostat.bib")
+```

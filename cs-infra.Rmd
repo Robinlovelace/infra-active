@@ -179,14 +179,100 @@ webshot::webshot("https://www.theguardian.com/environment/bike-blog/2018/jul/18/
 ```{r}
 hs21 = read_sf("https://github.com/npct/pct-team/raw/master/input-data/hs21.geojson")
 hs22 = read_sf("https://github.com/npct/pct-team/raw/master/input-data/hs22.geojson")
-mhs2 = tm_shape(hs21) +
-  tm_lines(col = "blue", lwd = 3) +
-  tm_shape(hs22) +
-  tm_lines(col = "red", lwd = 3)
-tmap_leaflet(mhs2)
+library(leaflet)
+m = leaflet() %>% 
+  addProviderTiles(providers$OpenTopoMap) %>% 
+  # addProviderTiles(providers$Thunderforest.OpenCycleMap) %>% 
+  addPolylines(data = hs21, color = "blue", weight = 5) %>% 
+  addPolylines(data = hs22, color = "red", weight = 5)
+
+m
+  
+# mhs2 = tm_shape(hs21) +
+#   tm_lines(col = "blue", lwd = 3) +
+#   tm_shape(hs22) +
+#   tm_lines(col = "red", lwd = 3)
+# tmap_leaflet(mhs2)
 ```
 
+--
 
+- 330 miles of track (~£100k/m)
+- £55 billion estimated cost (~£40/person/yr during build)
+- 2026 - 2033 estimated completion dates (phase 1 and 2)
+
+<!-- (source: [wikipedia](https://en.wikipedia.org/wiki/High_Speed_2)) -->
+
+```{r, echo=FALSE, eval=FALSE}
+55e9 / # cost
+  66e6 / # pop
+  20 # years
+55e9 / (330e3 * 1.61)
+```
+
+---
+
+
+## The impacts of infrastructure are international
+
+- Roads and other major structures are being constructed on a huge scale worldwide
+- But there is little assessment on their active travel impacts
+- Credit: flickr user [thestuff](https://www.flickr.com/photos/thestuff/)
+
+![](https://farm4.staticflickr.com/3041/2646783176_7ba553391b_z_d.jpg)
+
+<!-- it's in Tanzania -->
+
+---
+
+## Research into impacts of roads
+
+The extension of the M74 motorway = 'natural experiment':
+
+- People who live near motorways seem to be less physically active  `r Citep(my_bib, "ogilvie_evaluating_2006", .opts = list(cite.style = "authoryear"))` 
+- And more car dependent `r Citep(my_bib, "prins_effects_2017", .opts = list(cite.style = "authoryear"))` 
+
+--
+
+- Limited evidence of impacts on active travel
+    
+![](https://ichef-1.bbci.co.uk/news/660/media/images/53729000/jpg/_53729740_53729737.jpg)
+
+---
+
+## Research into impacts of roads II
+
+A recent review of impact assessment methods in the English context found that an increasingly wide range of methods and approaches were being used  `r Citep(my_bib, "tajima_should_2013", .opts = list(cite.style = "authoryear"))`:
+
+- Environmental Impact Assessment (EIA)
+- Strategic Environmental Assessment (SEA)
+- Health Impact Assessment (HIA)
+- Gender Impact Assessment (GIA)
+- Equality Impact Assessment (EqIA)
+
+- But overall not a huge amount of research in the area, particularly in relation to the impact on active travel:
+
+--
+
+- "there is very little empirical data on the impact of road transport interventions", aside from injury reduction estimates `r Citep(my_bib, "thomson_assessing_2008", .opts = list(cite.style = "authoryear"))` 
+
+---
+
+## Active travel impacts: a typology
+
+```{r type, echo=FALSE, fig.cap="A typology of active travel options.", out.width="100%"}
+knitr::include_graphics("figures/active-travel-options.png")
+```
+
+---
+
+# Methods
+
+- Lewes-Uckfield line used as the study area
+
+```{r lc, fig.cap="Overview of the Lewes-Uckfield line with a 10 km buffer (blue). Width is proportional to the number of commutes.", out.width="70%", warning=FALSE, eval=FALSE}
+# knitr::include_url("http://rpubs.com/RobinLovelace/417218")
+```
 
 ---
 
@@ -201,3 +287,10 @@ To use the tools presented, see:
 PrintBibliography(my_bib)
 # RefManageR::WriteBib(my_bib, "refs-geostat.bib")
 ```
+
+```{r, eval=FALSE, engine='zsh'}
+cp -rv cs-infra_files ~/h/blog/robinlovelace.github.io/presentations
+cp cs-infra.html ~/h/blog/robinlovelace.github.io/presentations
+
+```
+

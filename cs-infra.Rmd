@@ -13,6 +13,19 @@ widescreen: true
 bibliography: references.bib
 ---
 
+
+```{r, eval=FALSE, engine='zsh', echo=FALSE}
+cp -rv cs-infra_files ~/h/blog/robinlovelace.github.io/presentations
+cp cs-infra.html ~/h/blog/robinlovelace.github.io/presentations
+cd ~/h/blog/robinlovelace.github.io/presentations
+git status
+git diff
+git add -A
+git commit -am 'Update slides'
+git push
+cd ~/papers/infra-active
+```
+
 <!-- The background of this research is the huge impact major transport infrastructure projects such as HS2 will have on walking and cycling and the lack of evidence and established methodologies for estimating such impacts before work begins. Large infrastructure projects affect many aspects of life and there are well-established methods in economic appraisal, cost-benefit analysis and environmental impact assessment. Recently other types of assessment have emerged, including health and equality impact assessment. There is an emerging literature focussing explicitly on active travel impacts, much of which seeks to evaluate the impacts of new schemes on walking. However, there is little in the way of methods for assessing likely impacts of new schemes a-priori, let alone reproducible methods for assessing potential impacts before they arise. -->
 <!-- Motivated by the need for accessible and scalable tools to assess active travel impacts of new developments, this paper sets out methods for active travel impact assessment. It is based on the division of active travel impacts based on the geographic relations between the development and walking and cycling desire lines: Severance, when new infrastructure cuts across routes with high active travel potential; parallels, opportunities for constructing new routes parallel new infrastructure; and integration with existing transport services, where new or different active travel options are unlocked by new infrastructure.  -->
 <!-- We find that the methods have the potential to identify and act on risks and opportunities associated with proposed developments down to road segment level. We conclude that new methods, such as those presented in this paper, have the potential to ensure that the impacts of major infrastructure projects on walking and cycling are properly accounted for before building begins. -->
@@ -230,7 +243,7 @@ m
 The extension of the M74 motorway = 'natural experiment':
 
 - People who live near motorways seem to be less physically active  `r Citep(my_bib, "ogilvie_evaluating_2006", .opts = list(cite.style = "authoryear"))` 
-- And more car dependent `r Citep(my_bib, "prins_effects_2017", .opts = list(cite.style = "authoryear"))` 
+- And more car dependent 
 
 --
 
@@ -260,37 +273,163 @@ A recent review of impact assessment methods in the English context found that a
 
 ## Active travel impacts: a typology
 
-```{r type, echo=FALSE, fig.cap="A typology of active travel options.", out.width="100%"}
-knitr::include_graphics("figures/active-travel-options.png")
-```
+![](https://raw.githubusercontent.com/npct/pct-team/master/infra-active/active-travel-options.png)
+
+
+A typology of active travel options.
 
 ---
 
 # Methods
 
 - Lewes-Uckfield line used as the study area
+- Online version of this map: http://rpubs.com/RobinLovelace/417218
 
-```{r lc, fig.cap="Overview of the Lewes-Uckfield line with a 10 km buffer (blue). Width is proportional to the number of commutes.", out.width="70%", warning=FALSE, eval=FALSE}
-# knitr::include_url("http://rpubs.com/RobinLovelace/417218")
+```{r lc, fig.cap="Overview of the Lewes-Uckfield line with a 10 km buffer (blue). Width is proportional to the number of commutes.", out.width="70%", warning=FALSE}
+tmap_mode("plot")
+  tm_shape(buff) + tm_borders(col = "blue", lwd = 3) +
+  tm_shape(l_lc) + tm_lines(lwd = "all", scale = 20, col = "Percent cycling", alpha = 0.5, n = 5, breaks = 2^(-1:4),
+                              palette = "inferno", auto.palette.mapping = F, ) +
+  tm_shape(lewes_uckfield) + tm_lines(lwd = 5, col = "black")
 ```
 
 ---
 
-## Thanks, Links, References
 
-To use the tools presented, see:
+## Parallels (Credit: Philip McErlean, [CC](https://www.flickr.com/photos/64320477@N05/26962563542/in/photolist-H5AbMd-bmHtys-dj4dSc-Sxr1LN-g9QaLe-aj6osS-Vmn2Hi-drTqjZ-REBnZ2-oqzWJR-XygYk8-ey86yJ-RRsPyK-add2nu-oo97HL-Terhrw-nQAUzG-riVbre-q9wH2F-ePNB8p-jEZP1S-VMUuuc-bMRHFv-78dQhE-SeWFgk-X1dL4Z-TL49Em-XRRpbc-rhLmKz-SeWEbK-ngH1X9-nxuaC1-h1CoA4-XiryLb-W2FdM8-gornno-RMUcBN-TKLMbc-TP1YNc-UzXyjS-4QEVnh-mNtNkj-pNHTWM-fGj2CS-qev2ig-6fZCEZ-pdmJRp-QyZapf-S9tX7x-QyZp99) )
 
-- www.pct.bike
-- www.cyipt.bike
+![](https://farm8.staticflickr.com/7040/26962563542_611c676e45_z_d.jpg)
+
+---
+
+## Cycling potential parallel to the route
+
+3 stage methodology to identify parallel lines:
+
+--
+
+- Subset desire lines whose cetrepoints are near to the proposed route
+
+--
+
+- Segment the proposed route
+
+--
+
+- Calculate the angle of each route
+
+--
+
+Then keep only lines parallel to proposed route segments
+
+---
+
+## Subsetting desire lines by centre point proximity
+
+```{r centre points}
+tm_shape(l_lc) + tm_lines(col = "grey", lwd = 3) +
+tm_shape(buff) + tm_fill(col = "blue", alpha = 0.3) +
+  tm_shape(lewes_uckfield) + tm_lines(lwd = 5, col = "black") +
+  tm_shape(l_cp) + tm_dots() +
+  tm_shape(l_lc[sel_centrepoint,]) + tm_lines() 
+```
+
+Illustration of the 'line centre point' subsetting method
+
+---
+
+## Finding desire lines that are (roughly) parallel
+
+This involved the development of a new R function, `angle_diff()`
+
+Online version: http://rpubs.com/RobinLovelace/417326
+
+```{r}
+a = angle_diff(l = l_lc, angle = l_a, bidirectional = TRUE)
+sel_para = a < 30
+qtm(l_lc, lines.col = "grey") +
+  qtm(l_lc[sel_para,]) +
+  qtm(lewes_uckfield, lines.lwd = 4, lines.col = "black") 
+```
+
+---
+
+## What about perpendicular lines (severance)?
+
+The same method!
+
+```{r}
+l_lc$Perpendicular = a > 60
+qtm(l_lc, lines.col = "grey") +
+  qtm(l_lc[l_lc$Perpendicular,]) +
+  qtm(lewes_uckfield, lines.lwd = 4, lines.col = "black") 
+```
+
+---
+
+## 3: Access to stations (Credit: M. Morgan)
+
+- Divide each route into 3
+
+```{r, echo=FALSE, out.width="60%"}
+knitr::include_graphics("https://raw.githubusercontent.com/npct/pct-team/master/infra-active/stations.png")
+```
+
+---
+
+## How to deal with long, windy routes?
+
+- Break the train line into segments
+
+```{r segs, fig.cap="Method of splitting the route into discrete segments using the line segment function from the stplanr R package (a) and cycling potential severed (b).", echo=FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/npct/pct-team/master/figures/route-sel.png")
+```
+
+---
+
+## All methods together
+
+```{r metafigure, echo=FALSE, fig.cap="Centre point-buffer (a), parallel (b), perpendicular (c) and station access (d) methods.", out.width="50%"}
+knitr::include_graphics("https://raw.githubusercontent.com/npct/pct-team/master/figures/infra-selection-all.png")
+```
+
+---
+
+## Cycling opportunities and threats
+
+```{r, echo=FALSE}
+res = readRDS("res.Rds")
+res_stations = readRDS("res_stns.Rds")
+# sel_res = grepl(pattern = "11|Gov", rownames(res))
+# res_sub = res[sel_res,]
+res_sub = rbind(res[1:3,], res_stations[1,], res[4:6,], res_stations[2,])
+names_scens = c(gsub(pattern = "Census 2011: ", replacement = "", row.names(res_sub[1:3,])),
+                "Cycling to stations")
+names_scens = c("Baseline", names_scens, "Scenario", names_scens)
+res_sub[2:4] = apply(res_sub[2:4], 2, round, 1)
+empty_string = rep("", ncol(res_sub))
+res_sub = rbind(empty_string, res_sub[1:4,], empty_string, res_sub[5:8,])
+res_sub = cbind(Scenario = names_scens, res_sub)
+knitr::kable(res_sub, digits = 1, row.names = F, format = "html")
+```
+
+---
+
+## Where next?
+
+![](http://www.britishtramsonline.co.uk/news/wp-content/uploads/2017/06/1.rotherham-mh-550x367.jpg)
+
+Source [britishtramsonline.co.uk](http://www.britishtramsonline.co.uk/news/?p=17639)
+
+---
+
+class: small
+
+## Thanks!
 
 ```{r, 'refs', results="asis", echo=FALSE}
-PrintBibliography(my_bib)
-# RefManageR::WriteBib(my_bib, "refs-geostat.bib")
+PrintBibliography(my_bib, )
+# Many ways to take this forward
+# Benefits of investing equivalent money in cycling?
+# Integration into existing tools like PCT and CyIPT
 ```
-
-```{r, eval=FALSE, engine='zsh'}
-cp -rv cs-infra_files ~/h/blog/robinlovelace.github.io/presentations
-cp cs-infra.html ~/h/blog/robinlovelace.github.io/presentations
-
-```
-

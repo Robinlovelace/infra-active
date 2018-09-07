@@ -6,3 +6,9 @@
 *.Rdata
 *.pdf
 *.tex
+cycle-tools-wide.csv
+rsconnect
+infra-active-cycling-society-abstract-rl.
+*_file*
+infra-active-cycling-society-abstract-rl.*
+*.html

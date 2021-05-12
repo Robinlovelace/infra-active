@@ -1,11 +1,12 @@
 ---
 title: 'Geographic methods for assessing the active travel impacts of major transport infrastructure projects'
-author: "Robin Lovelace, Malcolm Morgan, Craig Morton, Anna Goodman"
+# author: "Robin Lovelace, Malcolm Morgan, Craig Morton, Anna Goodman"
 date: "`r Sys.Date()`"
 # output: md_document
-# output:
-#     bookdown::pdf_document2:
-#       keep_tex: true
+output:
+    bookdown::pdf_document2:
+    # bookdown::word_document2:
+      keep_tex: true
 bibliography: references.bib
 ---
 
@@ -20,6 +21,8 @@ if(any(!pkgs_installed)) install.packages(pkgs)
 purrr::map_lgl(pkgs, require, character.only = TRUE)
 # knitr::opts_chunk$set(eval = FALSE)
 ```
+
+Plan: submit this to the International Journal of Sustainable Transportation by end of May 2021
 
 # Abstract {-}
 

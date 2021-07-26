@@ -251,10 +251,13 @@ Only a few hundred commuters pass directly parallel to the route, mostly of medi
 ## Cycling potential parallel to the route
 
 ```{r gendata, echo=FALSE, message=FALSE}
+# Old sp way to be deleted
+# l_cp = as_Spatial(l_lc) %>% 
+#   geo_projected(., fun = maptools::SpatialLinesMidPoints) %>% 
+#   st_as_sf()
 # centre point subsetting
-l_cp = as_Spatial(l_lc) %>% 
-  geo_projected(., fun = maptools::SpatialLinesMidPoints) %>% 
-  st_as_sf()
+l_cp = sf::st_point_on_surface(l_lc)
+
 # sel_centrepoint = rgeos::gContains(buff, l_cp, byid = T)[,1]
 sel_centrepoint = st_contains(buff, l_cp, sparse = FALSE)[1, ]
 
@@ -275,9 +278,11 @@ l_lc$`Parallel selection` = sel_finalpar
 l_lc$`Touching buffer` = TRUE
 
 # Perpendicular lines
-l_seg = lewes_uckfield %>% as(., "Spatial") %>% 
-  line_segment(., segment_length = 1000) %>% 
-  st_as_sf(.)
+# l_seg = lewes_uckfield %>% as(., "Spatial") %>% 
+#   line_segment(., segment_length = 1000) %>% 
+#   st_as_sf(.)
+# saveRDS(l_seg, "l_seg.Rds")
+l_seg = readRDS("l_seg.Rds")
 
 # saveRDS(l_seg, "l_seg.Rds")
 # l_seg = readRDS("data-sources/l_seg.Rds")
@@ -556,7 +561,7 @@ It is in terms of the methods for quantifying the potential for desire lines par
 
 A limitation of the current approach from a policy perspective is that the estimated impacts are presented as absolute values.
 Although this could be justified from methodological and public engagement perspectives --- in terms of ease of generating and understanding the results --- there is a danger that the perceived objectivity of the approach could reduce opportunities for legitimate debate.
-As with any a priori impact evaluation process, modelling undertaken by experts could be used *intead of* a rigorous public consultation, taking into account the views of the affected population.
+As with any a priori impact evaluation process, modelling undertaken by experts could be used *instead of* a rigorous public consultation, taking into account the views of the affected population.
 To take hypothetical example, if the method were used to justify a major project, which ended-up having negative overall impacts, it could do more harm than good.
 Of course this hypothetical example is unlikely to arise in practice as ATIA is currently non-existant.
 However, it is useful as it leads to recommendations about how the methods should be used: that sensitivity analysis (not conducted in this paper) should be undertaken to demonstrate the range of potential impacts; that the results should feed-into wider processes of impact assessment; and that the method should be transparent.

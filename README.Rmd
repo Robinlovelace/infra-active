@@ -195,23 +195,23 @@ The methods have been implemented as functions in the R package **stplanr** [@lo
 ## Potential for severance
 
 Severance occurs when active travel along cyclable desire lines with high cycling potential is prevented or made more difficult by obstacles such as rivers, fast roads or railway tracks.
-A degree of severance can be expected along the full length of linear infrastructures.
-However, the degree of severance will be greatest in certain *severance pinch points* (henceforth referred to as severance points), for example, segments along a rail track which intersects desire lines connecting residential areas with employment zones on the other side.
+A degree of severance can be expected along the entire length of linear infrastructures.
+However, the degree of severance will be greatest in certain *severance pinch points* (henceforth referred to as severance points), for example, segments along a rail track that intersects desire lines connecting residential areas with employment zones on the other side.
 
-The methodology used to identify the proposed route segments with highest potential to cause severance (assuming the transport infrastructure is new) consists of three stages:
+The methodology used to identify the proposed route segments with the highest potential to cause severance (assuming the transport infrastructure is new) consists of three stages:
 
 -   Identify the desire lines which intersect with the infrastructure.
--   Quantify the number of potential cyclists blocked along segments of the infrastructure of every segment.
+-   Quantify the number of potential cyclists blocked for each segment of the infrastructure.
 -   Subset the segments which block the highest number of potential cyclists and identify potential crossing points.
 
-Note that based on the three-stage methodology outlined above, severance points are in fact more precisely described as 'severance segments', along which a range of points could be chosen for crossing points.
-However, the term 'severance point' is more intuitive, so we use this term throughout.
+Note that based on the three-stage methodology outlined above, severance points are, in fact, more precisely described as 'severance segments', along which a range of points could be chosen for crossing points. However, the term 'severance point' is more intuitive, so we use this term throughout.
 
 ## Potential cycling uptake along 'parallels'
 
 To identify parallels to linear features (i.e., a new road or rail line), a five-stage methodology was developed.
 
--   Subset cycling desire lines^[ A 'desire line' refers to a straight line connecting an origin-destination pair. In the context of this paper, which uses the outputs of the PCT version 1 as its input dataset, this means straight lines with a distance of 20 km or less connecting Middle Super Output Area population weighted centroids, with data on the number of people commuting in both directions. See @lovelace_propensity_2017 for further details.] to include only those in which the *centre point of the line* passes close to the new infrastructure. This was set as 10 km buffer in this paper.
+<!-- This is not the first time you have used desire line, so why define it here?-->
+-   Subset cycling desire lines^[ A 'desire line' refers to a straight line connecting an origin-destination pair. In the context of this paper, which uses the outputs of the PCT version 1 as its input dataset, this means straight lines with a distance of 20 km or less connecting Middle Super Output Area population-weighted centroids, with data on the number of people commuting in both directions. See @lovelace_propensity_2017 for further details.] to include only those in which the *centre point of the line* passes close to the new infrastructure. This was set as a 10 km buffer in this paper.
 -   Break the linear infrastructure of interest into segments of even distance.
 -   Calculate the angle of the segments and desire lines.
 -   Subset the desire lines again, to include only those that are within a threshold angle (set at 30 degrees) of the mean bearing of their closest infrastructure segment.
@@ -219,33 +219,35 @@ To identify parallels to linear features (i.e., a new road or rail line), a five
 
 ## Potential for cycling and public transport integration
 
-Increased travel to public transport is likely to occur near public transport stops and on desire lines that have an origin and destination near connected public transport nodes (typically bus stops or train stations).
-The methodology used to estimate the potential uptake of cycling due to integration with new public transport services associated with the new route assumes that new nodes have suitable provision for cycling, with safe routes to get there and sufficient cycle parking spaces, and consists of the following stages:
+Increased travel to public transport is likely to occur near public transport stops and on desire lines with an origin and destination near connected public transport nodes (typically bus stops or train stations).
+To estimate the potential uptake of cycling due to integration with new public transport services associated, we assume that stops have suitable cycle parking and safe routes between the public transport stop and the origin/destination. The method consists of the following stages:
 
--   Subset trips that could feasibly use public transport in terms of boarding and alighting, by subsetting those with both origin and destination within a given distance of a planned station/stop. <!-- what distacne was used? -->
+-   Subset trips that could feasibly use public transport in terms of boarding and alighting, by subsetting those with both origin and destination within a given distance of a planned station/stop. <!-- what distacne was used? Perhaps also exclude minimum distance (no point cycling 50 metres?-->
 -   Remove lines that have the same stop as their closest origin and destination.
--   Remove lines which are linked by existing public transport, thus will not change with the new linear infrastructure.
+-   Remove lines linked by existing public transport, thus will not change with the new linear infrastructure.
 -   Create new desire lines and routes that are from Origin/Destinations to public transport.
 -   Remove desire lines and routes where the cycling to and from public transport is greater than 1.1 times the direct cycling route, as these travellers are unlikely to use public transport. <!-- why 1.1? -->
--   Calculate change in cycling potential along these new desire lines.
+-   Calculate the change in cycling potential along these new desire lines.
 
 This method makes several simplifying assumptions that may or may not be valid depending on the nature of the new linear infrastructure.
 Firstly, the method is ignorant of the public transport network and so assumes that travel between any pair of stops is possible and practical.
 If this were not the case, it would be necessary to break the analysis into connected parts and analyse each part of the networks separately.
-Secondly, the method is not aware of financial and time costs associated with public transport.
+Secondly, the method is not aware of the financial and time costs associated with public transport.
 While the method can identify routes that are likely to be quicker to take a combined active travel and public transport journey than merely active travel directly, it does not consider the relative difference with driving directly.
 Therefore, care should be taken when assigning cyclist to these new routes.
 Finally, the method does not consider the proportion of walking and cycling to and from the public transport stop.
 This is likely to be affected by a range of variables such as distance and the ability to take a bike on public transport.
 
+<!-- this is a long list of caveats, do we need more to strengthen this part of the paper? -->
+
 # A case study of Lewes-Uckfield
 
 The Lewes-Uckfield train line is a proposed project to restore a rail link between Uckfield and Lewes on the south coast of England.
-This is part of wider plans to increase rail capacity in the area.
+This is part of broader plans to increase rail capacity in the area.
 As stated in the project brief, "Such infrastructure has the potential to support cycling if high-quality infrastructure is built alongside." This appendix analyses cycling potential along the proposed route, which is 16 km in length (see Figure \@ref(fig:lc)).
 <!-- we'll need to provide more information on the case study - where exactly is it in terms of UK geography, length of new route, is it a terminal station etc. --> Data on existing and potential future active travel patterns was taken from the Propensity to Cycle Tool [@lovelace_propensity_2017].
 The data represents commuter travel between zones created for the 2011 census.
-These zones are known as Middle layer Super Output Areas (MSOA), and the population weighted centroids of each MSOA are used as the origin and destinations in this analysis.
+These zones are known as Middle layer Super Output Areas (MSOA), and the population-weighted centroids of each MSOA are used as the origin and destinations in this analysis.
 
 <!-- # Cycling potential surrounding the Lewes-Uckfield trainline -->
 
@@ -283,7 +285,7 @@ if(file.exists(f)) {
 
 <!-- missing numbers -->
 
-There are `r # nrow(cents_lc)` MSOAs whose population weighted centroids lie within a 10 km buffer of the train line, representing `r # sum(cents_lc$all)` commuters.
+There are `r # nrow(cents_lc)` MSOAs whose population-weighted centroids lie within a 10 km buffer of the train line, representing `r # sum(cents_lc$all)` commuters.
 This area is illustrated in Figure \@ref(fig:lc).
 
 ```{r lc, fig.cap="Overview of the Lewes-Uckfield line with a 10 km buffer (blue). Width is proportional to the number of commutes; colour represents the proportion of people who cycle.", out.width="70%"}
@@ -372,10 +374,9 @@ knitr::include_graphics("figures/infra-selection-all.png")
 
 ### Breaking linear infrastructure into segments
 
-Because the Lewes-Uckfield line is short and relatively straight, we used the entire line as a single segment.
+We used the entire line as a single segment because the Lewes-Uckfield line is short and relatively straight.
 However, if the line were to be broken into segments, the results would resemble Figure \@ref(fig:segs)a.
-This demonstration of the method could be applied to larger and more complex routes, e.g. that of the proposed HS2 or HS2 cycle network route.
-<!-- this is the first time HS2 is mentioned - we'll need to either define what it is or remove it --> <!-- remove it is uk specific and the ret of the paper ig interational with a uk example --> <!-- 
+ <!-- 
 ```{r segments, fig.cap="Demonstration of the method for splitting the route into segments (a) ", out.height="7cm", eval=FALSE}
 knitr::include_graphics("figures/lewes-uckfield-segments.png")
 ```
@@ -387,9 +388,7 @@ knitr::include_graphics("figures/route-sel.png")
 
 ### Calculating the bearing of linear infrastructure segments
 
-The angle of the train track was calculated by a function `line_bearing()` which was developed for the **stplanr** R package specifically to solve this problem.
-
-Using this function, the angle of the route was calculated as follows:
+The angle of the train track was calculated by a function `line_bearing()`, which was developed for the **stplanr** R package specifically to solve this problem. Using this function, the angle of the route was calculated as follows:
 
 ```{r, echo=TRUE}
 line_bearing(lewes_uckfield)
@@ -399,7 +398,7 @@ line_bearing(lewes_uckfield)
 
 To find the lines that were close to parallel with the train line, the function `angle_diff()` was developed.
 All lines within 30 degrees, clockwise or anti-clockwise, to the train line, *and* have their midpoint within the route buffer, are illustrated in the red lines in Figure \@ref(fig:metafigure)b.
-It is clear from this Figure that a high number of lines were selected which are very unlikely benefit from cycling provision along the route, especially in the south-west segment of the plot.
+It is clear from this Figure that many lines were selected that are very unlikely to benefit from cycling provision along the route, especially in the southwest segment of the plot.
 
 <!-- these plots are unclear, I suggest not shoing the grey lines -->
 
@@ -413,8 +412,7 @@ tm_shape(buff) + tm_borders(col = "blue", lwd = 3) +
 
 <!-- this seems complex and confusing why not slelct line that start and end inside the 10 km buffer ? -->
 
-To resolve this issue, a smaller buffer was used to select line centre points.
-This was set at 5 km.
+To resolve this issue, a smaller buffer of 5 km was used to select line centre points.
 To remove desire lines that were still far from the train line a further subsetting method was developed.
 This involved selecting desire lines that pass within an even shorter distance to the train line, 2 km in this case.
 The results are presented in Figure \@ref(fig:metafigure)b, in which the orange lines were included through the centre point selection method but omitted by 'buffer intersection' method.
@@ -449,7 +447,7 @@ tm_shape(l_lc) + tm_lines(col = "grey", lwd = 3) +
 ### Quantifying severance per segments of the train line
 
 The cycling potential of the intersecting 'perpendicular' lines was then summed *per 1 km segment* of the rail line.
-The results, for the Government Target scenario, are presented in \@ref(fig:segs)b which shows, as one would expect, that severance impacts would be greatest at the ends of the proposed route, where population densities and employment opportunities are greatest.
+The results for the Government Target scenario, are presented in \@ref(fig:segs)b, which shows, as one would expect, that severance impacts would be most significant at the ends of the proposed route, where population densities and employment opportunities are greatest.
 <!-- what is the 'Government Target scenario'? - either define or remove -->
 
 ```{r perpagg, fig.cap="Total cycling potential (under the Government Target scenario) 'severed' by the proposed rail line. Line width is proportional to the square root of the total cycling potential for each segment.", fig.height=5, eval=FALSE}

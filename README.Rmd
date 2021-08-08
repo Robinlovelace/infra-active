@@ -551,7 +551,7 @@ Overall, the potential for cycling along routes parallel to the track appears to
 
 ## Cycling potential around the proposed route
 
-Under the ambitious Ebike scenario, which represents Dutch levels of cycling plus high uptake of electric bicycles, the PCT shows that cycling potential along routes running parallel to the line is uneven geographically.
+Under the ambitious 'Ebike' scenario, which represents Dutch levels of cycling plus high uptake of electric bicycles, the PCT shows that cycling potential along routes running parallel to the line is uneven geographically.
 Unsurprisingly, cycling potential is clustered at either end of the proposed route, with relatively high increases modelled along segments of the network between Lewes and Ringmer, along the A26 and along routes running north-south through Uckfield.
 This is shown in Figure \@ref(fig:pct-uck).
 
@@ -620,14 +620,15 @@ In terms of the local case study, it seems there is a greater potential parallel
 
 In total, we estimate that around 2500 commuters make trips that are parallel to the line, of whom 1.1% currently cycle (N=28).
 We further estimate that under a Go Dutch scenario, the proportion of these commuter cycling would be 6.1% (N=158), while under the Ebike scenario, it would be 15.4% (N=397).
-The Go Dutch and Ebike scenarios assume that English commuters acquire a Dutch cycling culture and Dutch levels of infrastructure.  A high quality, traffic-free cycle route along the Lewes-Uckfield train line could be a helpful step towards achieving Dutch infrastructure. However, it should be remembered that the impact of the cycle path might also depend on the quality of the surrounding cycle network.
+The Go Dutch and Ebike scenarios assume that English commuters acquire a Dutch cycling culture and Dutch levels of infrastructure: A high quality, traffic-free cycle route along the Lewes-Uckfield train line could be a helpful step towards achieving Dutch infrastructure.
+However, it should be remembered that the impact of the cycle path might also depend on the quality of the surrounding cycle network.
 It should also be remembered that this analysis only examines commuter cycling; adding in cycling potential for other cycling types, e.g. leisure cycling, might generate considerably higher estimates as to the number of users.
 
 The proposed method raises questions about policy priorities related to mode choice: in cases where there is potential for improving walking, cycling, and public transport, which are favoured?
 
 The methods outlined in this paper have the potential to be used in situations beyond the assessment of new infrastructure.
-For example, in places where there are linear features that are conducive to conversion into walking and cycling paths such as disused railway lines, roads,or along privately owned routes.
-The methods outlined above could be used to decide which parts of these features investments should be prioritised.
+For example, in places where there are linear features that are conducive to conversion into walking and cycling paths such as disused railway lines, roads, or along privately owned routes.
+The methods could be used to decide where along these these features investments should be prioritised.
 
 In terms of the methods for quantifying the potential for desire lines parallel and perpendicular to proposed routes, this paper will probably be of most use as the basis for further work.
 The Lewes-Uckfield line has served a useful purpose in this regard, as the case study is small enough to identify specific desire lines of interest and explore the methodology on local datasets that are not overwhelmingly large.
@@ -640,14 +641,22 @@ The work provides many interesting avenues for further development and research,
 
 A limitation of the current approach from a policy perspective is that the estimated impacts are presented as absolute values.
 Although this could be justified from methodological and public engagement perspectives --- in terms of ease of generating and understanding the results --- there is a danger that the perceived objectivity of the approach could reduce opportunities for legitimate debate.
-As with any a priori impact evaluation process, modelling undertaken by experts could be used *instead of* a rigorous public consultation, taking into account the views of the affected population.
-To take a hypothetical example, if the method were used to justify a major project, which ended up having overall negative impacts, it could do more harm than good.
+As with any a priori impact evaluation process, modelling undertaken by experts could be used *instead of* a rigorous public consultation, that considers the views of the affected population.
+Such use of these modelling methods would go against their intended use: to be used *before* decisions are made and *in addition to* proper consultation.
+
+To take a hypothetical example, if the method were used to justify a major project, which ended-up having negative overall impacts, it could do more harm than good.
 Of course, this hypothetical example is unlikely to arise in practice as ATIA is currently non-existent.
-However, it is useful as it leads to recommendations about how the methods should be used: that sensitivity analysis (not conducted in this paper) should be undertaken to demonstrate the range of potential impacts; that the results should feed-into wider processes of impact assessment; and that the method should be transparent.
+However, it is useful as it leads to recommendations about how the methods should be employed: that sensitivity analysis (not conducted in this paper) should be undertaken to demonstrate the range of potential impacts; that the results should feed-into wider processes of impact assessment; and that the method should be transparent.
+
 This final recommendation resonates with the broader project from which these methods arose: the PCT is an explicitly open-source and publicly accessible tool [@lovelace_propensity_2017].
-As such, impact assessment work or software resulting from the methods presented here should also be open source and open access, e.g. via an interactive online web tool and publication of the 'source code' underlying the work and resulting datasets.
+As such, impact assessment work or software resulting from the methods presented here should also be open source and open access, e.g., via an interactive on-line web tool and publication of the ‘source code’ underlying the work and resulting datasets.
+
+The typology and framework detailed in this paper allow an explicit impact assessment of the way new infrastructure can shift active travel patterns. By making use of these tools, authorities can be more confident that the decisions made in relation to new transport infrastructure will maximise the benefits such investments can bring.
+
 
 # Acknowledgements
+
+Thanks to Shane Snow, Active Travel Sponsor, High Speed & Major Rail Projects, Department for Transport, for comissioning this project and providing maps of the Lewes-Uckfield route.
 
 Thanks to Matthew Whittle, who digitised a scanned image of the proposed route.
 

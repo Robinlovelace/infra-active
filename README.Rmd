@@ -374,7 +374,7 @@ These represent `r # round(sum(sel_centrepoint)/length(sel_centrepoint) * 100, 1
 knitr::include_graphics("figures/infra-selection-all.png")
 ```
 
-### Breaking linear infrastructure into segments
+### Dividing linear infrastructure into segments
 
 We used the entire line as a single segment because the Lewes-Uckfield line is short and relatively straight.
 However, if the line were to be broken into segments, the results would resemble Figure \@ref(fig:segs)a.

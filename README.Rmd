@@ -159,6 +159,8 @@ More importantly, from a practitioner perspective, it outlines and demonstrates 
 Major infrastructure can impact active transport in a range of different ways.
 To organise the assessment process, these can be categorised into three broad types of impact, as illustrated in Figure \@ref(fig:type).
 
+[Note from Robin: it would be good to bulk each of these sections up with references and more description.]
+
 ```{r type, echo=FALSE, fig.cap="A typology of active travel options.", out.width="100%"}
 knitr::include_graphics("figures/active-travel-options.png")
 ```

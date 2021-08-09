@@ -4,8 +4,8 @@ title: 'Geographic methods for assessing the active travel impacts of major tran
 date: "`r Sys.Date()`"
 # output: md_document
 output:
-    bookdown::pdf_document2:
-    # bookdown::word_document2:
+    # bookdown::pdf_document2:
+    bookdown::word_document2:
       keep_tex: true
 bibliography: references.bib
 ---
@@ -49,7 +49,10 @@ More recently, other types of assessment have emerged, including health and equa
 <!-- [@mueller_health_2015]. --> However, there is little research in the literature on methods for assessing likely impacts of new schemes before they are built (a priori), let alone geographic methods for assessing potential impacts based on potential levels of walking and cycling.
 
 Motivated by the need for accessible and scalable tools to assess active travel impacts of new developments, this paper sets out methods for active travel impact assessment.
-The paper uses the geographical relationship between a proposed development and walking and cycling desire lines to identify three types of impact.  *Severance*, when new infrastructure cuts across routes with high active travel potential; *Parallels*, opportunities for constructing active travel features parallel to new infrastructure; and *integration* with existing transport services, where new or different active travel options are unlocked by new infrastructure.
+It is based on the following classification of active travel impacts: *severance*, when new infrastructure cuts across routes with high active travel potential; *parallels*, opportunities for constructing active travel features parallel to new infrastructure; *integration* with existing transport services, where new or different active travel options are unlocked by new infrastructure; and impacts that arise during the *construction* phase of major infrastructure projects.
+We find that commonly available geographic datasets representing desire lines between the proposed/planned/new development, and the centreline of the proposed new linear infrastructure, can generate actionable evidence on a range of active travel impacts.
+This evidence can be generated rapidly and at relatively low cost to influence planning decisions and rank route options during project scoping stages.
+During planning, construction and post-build stages the methods could be used to prioritise investments in crossings and other interventions to mitigate negative scheme impacts and maximise benefits, e.g. by encouraging access to new rail stations and bus stops on the new route by active modes to reduce car dependency.
 A case study of a proposed railway between Lewes and Uckfield in Essex, UK, demonstrates the methods' real-world application.
 
 <!-- Cycling and Society abstract -->
@@ -658,6 +661,6 @@ The typology and framework detailed in this paper allow an explicit impact asses
 
 Thanks to Shane Snow, Active Travel Sponsor, High Speed & Major Rail Projects, Department for Transport, for comissioning this project and providing maps of the Lewes-Uckfield route.
 
-Thanks to Matthew Whittle, who digitised a scanned image of the proposed route.
+Thanks to Matthew Whittle, Analyst at Geoplan, for digitising a scanned image of the proposed route.
 
 # References

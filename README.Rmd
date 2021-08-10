@@ -134,13 +134,15 @@ Active travel is mentioned in the heading, but only as a sub-sub-heading within 
 
 ## Taking account of active travel
 
-There is a clear need for methods and concepts to encourage active travel impacts to be considered in assessing major infrastructure projects.
-At the risk of further diluting the impact assessment literature with more acronyms [see @tajima_should_2013] we refer to this aspect of impact assessment as Active Travel Impact Assessment (ATIA), as a component of the broader process of HIA.
-Because active travel is central to health, environmental and social impacts, we suggest that ATIA <!-- (or some alternative to it, perhaps building on the methods outlined in this paper or integrated into wider IA processes) --> is a vital component of health impacts.
-Despite the importance of active travel modes, there are few tools for a priori ('before build' and ideally 'before decision making and investment') assessment and quantification of the likely impacts of large infrastructure projects on walking and cycling.
+There is a clear need for methods and concepts to encourage active travel impacts to be considered in the assessment of major infrastructure projects.
+At the risk of further diluting the impact assessment literature with more acronyms [see @tajima_should_2013] we refer to this aspect of impact assessment as Active Travel Impact Assessment (ATIA), as a component of the wider process of HIA.
+Because active travel is central to health, environmental and social impacts, we suggest that ATIA
+<!-- (or some alternative to it, perhaps building on the methods outlined in this paper or integrated into wider IA processes) --> 
+is a vital component of health impacts.
+Despite the importance of active travel modes, there are few tools for a priori (pre build) assessment and quantification of the impacts of large infrastructure projects on walking and cycling.
 
 One tool that has been developed specifically to explore active transport potential at regional to street levels (the geographic scope of many large transport infrastructure projects) is the Propensity to Cycle Tool (PCT) [@lovelace_propensity_2017].
-The PCT is a publicly accessible tool for exploring current cycling levels and the potential to grow under a range of national scenarios (see [www.pct.bike](http://www.pct.bike/)).
+The PCT is a publicly accessible tool for exploring current cycling levels and future potential under a range of national scenarios (see [www.pct.bike](http://www.pct.bike/)).
 This prior work, and the fact that the PCT is open source, suggests the underlying methods --- geographic analysis of travel desire lines, routes and route networks --- could also be used for ATIA, but using local rather than global scenarios of change.
 Building on this context, the remainder of this paper sets out methods for doing so and discusses the implications for major transport infrastructure plans.
 
@@ -152,22 +154,24 @@ Building on this context, the remainder of this paper sets out methods for doing
 
 <!-- Whis i sithis in quotes it not clear who is being quoted it is Ogilvie?-->
 
-"Major transport projects may promote or discourage physical activity in the form of walking and cycling", yet there has been very little quantitative post-build (a posteriori) evaluation of past projects [@ogilvie_evaluating_2006], let alone a priori assessment of potential impacts.
+"Major transport projects may promote or discourage physical activity in the form of walking and cycling", yet there has been little quantitative a posteriori (post build) evaluation of past projects [@ogilvie_evaluating_2006], let alone a priori assessment of potential impacts.
 The present paper seeks to address this research and methodological gap via geographical methods and emphasis on cycling potential.
 
 The lack of organisational overlap between major transport infrastructure and active travel interventions helps explain why the two are seldom considered.
 There has been little research into the active travel impacts of major infrastructure projects.
-Nevertheless, as we shall see in the next section, major transport infrastructure has the potential to have a wide range of impacts on transport behaviour overall and levels of active travel in particular.
+Yet, as we shall see in the next section, major transport infrastructure has the potential to have a wide range of impacts on transport behaviour overall and levels of active travel in particular.
 The purpose of this paper is to create a framework for the consideration of active travel impacts of major transport infrastructure.
 More importantly, from a practitioner perspective, it outlines and demonstrates methods for assessing these impacts and prioritising interventions that will reduce the negative impacts on walking and cycling.
 <!-- The most radical option to minimise the active transport impacts of building large roads and railways is not to build them at all and invest in a series of smaller walking and cycling interventions instead. Arguments for doing this are discussed in the final section. -->
 
 # A typology of active transport impacts of major transport infrastructure projects
 
-Major infrastructure can impact active transport in a range of different ways.
-To organise the assessment process, these can be categorised into three broad types of impact, as illustrated in Figure \@ref(fig:type).
+Major infrastructure can impact upon active transport in a range of different ways.
+To organise the assessment process, these can be categorised into three broad types of post build impact, as illustrated in Figure \@ref(fig:type).
+There may also be substantial impacts during the construction phase, as outlined in Section \@ref(impacts-during-construction).
+The focus of this paper is on impacts after the infrastructure project has been completed; impacts during the construction phase of major infrastructure projects merit further research (the Sheffield tram project took four years, from 1991 to 1995, with impacts on walkways and roads during the construction stage affecting active travel, to provide one example).
 
-[Note from Robin: it would be good to bulk each of these sections up with references and more description.]
+<!-- [Note from Robin: it would be good to bulk each of these sections up with references and more description.] -->
 
 ```{r type, echo=FALSE, fig.cap="A typology of active travel options.", out.width="100%"}
 knitr::include_graphics("figures/active-travel-options.png")
@@ -194,6 +198,11 @@ The consideration of parallels encourages HIAs to explore not only the project's
 New infrastructure can result in an increase in active travel in nearby areas along the route.
 For example, a railway extension may result in more people walking or cycling in the centre of town to access the rail network whereas they previously drove directly to their destination.
 This effect can manifest at a substantial distance from the new infrastructure by linking previously disconnected areas.
+
+## Impacts during construction
+
+Whilst the finished state of a project will have long lasting impacts, the impact during construction can have a larger, albeit temporary, impact. Construction projects of any size result in localised increases in traffic from the movement of workers and materials.
+Where existing roads do not provide suitable access, temporary roads are constructed, which can mean that the impacts described in the preceding sections are magnified.
 
 # Methodology
 
@@ -253,7 +262,7 @@ This is likely to be affected by a range of variables such as distance and the a
 # A case study of Lewes-Uckfield
 
 The Lewes-Uckfield train line is a proposed project to restore a rail link between Uckfield and Lewes on the south coast of England.
-This is part of broader plans to increase rail capacity in the area.
+This is part of wider plans to increase rail capacity in the area.
 As stated in the project brief, "Such infrastructure has the potential to support cycling if high-quality infrastructure is built alongside." This appendix analyses cycling potential along the proposed route, which is 16 km in length (see Figure \@ref(fig:lc)).
 <!-- we'll need to provide more information on the case study - where exactly is it in terms of UK geography, length of new route, is it a terminal station etc. --> Data on existing and potential future active travel patterns was taken from the Propensity to Cycle Tool [@lovelace_propensity_2017].
 The data represents commuter travel between zones created for the 2011 census.
@@ -656,7 +665,7 @@ To take a hypothetical example, if the method were used to justify a major proje
 Of course, this hypothetical example is unlikely to arise in practice as ATIA is currently non-existent.
 However, it is useful as it leads to recommendations about how the methods should be employed: that sensitivity analysis (not conducted in this paper) should be undertaken to demonstrate the range of potential impacts; that the results should feed-into wider processes of impact assessment; and that the method should be transparent.
 
-This final recommendation resonates with the broader project from which these methods arose: the PCT is an explicitly open-source and publicly accessible tool [@lovelace_propensity_2017].
+This final recommendation resonates with the wider project from which these methods arose: the PCT is an explicitly open-source and publicly accessible tool [@lovelace_propensity_2017].
 As such, impact assessment work or software resulting from the methods presented here should also be open source and open access, e.g., via an interactive on-line web tool and publication of the ‘source code’ underlying the work and resulting datasets.
 
 The typology and framework detailed in this paper allow an explicit impact assessment of the way new infrastructure can shift active travel patterns. By making use of these tools, authorities can be more confident that the decisions made in relation to new transport infrastructure will maximise the benefits such investments can bring.

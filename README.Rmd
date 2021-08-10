@@ -4,8 +4,8 @@ title: 'Geographic methods for assessing the active travel impacts of major tran
 date: "`r Sys.Date()`"
 # output: md_document
 output:
-    # bookdown::pdf_document2:
-    bookdown::word_document2:
+    bookdown::pdf_document2:
+    # bookdown::word_document2:
       keep_tex: true
 bibliography: references.bib
 ---
@@ -391,11 +391,13 @@ These represent `r # round(sum(sel_centrepoint)/length(sel_centrepoint) * 100, 1
 knitr::include_graphics("figures/infra-selection-all.png")
 ```
 
-### Dividing linear infrastructure into segments
+### Dividing the infrastructure route into segments
 
-We used the entire line as a single segment because the Lewes-Uckfield line is short and relatively straight.
-However, if the line were to be broken into segments, the results would resemble Figure \@ref(fig:segs)a.
- <!-- 
+The process of dividing the proposed route of the major infrastructure, in this case a railway between Lewes and Uckfield, is illustrated in Figure \@ref(fig:segs)a.
+The method could be applied to larger and more complex routes, e.g., that of the proposed HS2 route in the UK or major planned roads in other countries.
+Selecting maximum/average segment lengths carefully is needed to ensure the results are both sufficiently high resolution to act on but sufficiently aggregated to interpret and visualise.
+
+<!-- 
 ```{r segments, fig.cap="Demonstration of the method for splitting the route into segments (a) ", out.height="7cm", eval=FALSE}
 knitr::include_graphics("figures/lewes-uckfield-segments.png")
 ```
@@ -405,9 +407,10 @@ knitr::include_graphics("figures/lewes-uckfield-segments.png")
 knitr::include_graphics("figures/route-sel.png")
 ```
 
-### Calculating the bearing of linear infrastructure segments
+### Calculating the bearing of route segments
 
-The angle of the train track was calculated by a function `line_bearing()`, which was developed for the **stplanr** R package specifically to solve this problem. Using this function, the angle of the route was calculated as follows:
+The angle of the train track was calculated by a function `line_bearing()`, which was implemented in the **stplanr** R package specifically to solve this problem.
+Using this function, the angle of the route segments can be calculated as follows:
 
 ```{r, echo=TRUE}
 line_bearing(lewes_uckfield)
@@ -417,7 +420,7 @@ line_bearing(lewes_uckfield)
 
 To find the lines that were close to parallel with the train line, the function `angle_diff()` was developed.
 All lines within 30 degrees, clockwise or anti-clockwise, to the train line, *and* have their midpoint within the route buffer, are illustrated in the red lines in Figure \@ref(fig:metafigure)b.
-It is clear from this Figure that many lines were selected that are very unlikely to benefit from cycling provision along the route, especially in the southwest segment of the plot.
+It is clear from this Figure that many lines were selected that are very unlikely to benefit from cycling provision along the route, especially in the south-west segment of the plot.
 
 <!-- these plots are unclear, I suggest not shoing the grey lines -->
 
@@ -431,7 +434,8 @@ tm_shape(buff) + tm_borders(col = "blue", lwd = 3) +
 
 <!-- this seems complex and confusing why not slelct line that start and end inside the 10 km buffer ? -->
 
-To resolve this issue, a smaller buffer of 5 km was used to select line centre points.
+To resolve this issue, a smaller buffer was used to select line centre points.
+This was set at 5 km.
 To remove desire lines that were still far from the train line a further subsetting method was developed.
 This involved selecting desire lines that pass within an even shorter distance to the train line, 2 km in this case.
 The results are presented in Figure \@ref(fig:metafigure)b, in which the orange lines were included through the centre point selection method but omitted by 'buffer intersection' method.
@@ -510,6 +514,7 @@ Analysis of the origin-destination data in relation to proposed rail station loc
 The main beneficiaries in the local area would be people north of Uckfield commuting to Lewes and vice versa.
 Desire lines between Lewes and Brighton can use the existing railway, while there are no desire lines between Brighton and North of Uckfield.
 The lack of desire lines likely reflects the current transport network's lack of connectivity between Lewes and Uckfield.
+
 Changes in travel patterns caused by new rail links are beyond the scope of this paper.
 However, the method outlined above could be combined with existing techniques to understand the mode shift to rail, and thus predict any cycling increase resulting from a change in rail connectivity.
 
@@ -627,8 +632,6 @@ tm_shape(l_lc) + tm_lines(col = "grey", lwd = 3) +
   tm_shape(l2stat) + tm_lines(lwd = 3) 
 ```
 
-\\newpage
-
 # Discussion
 
 <!-- the PCT scenariod have never been explained, and it not clear that you are using the PCT as a tool as well as asource of data -->
@@ -637,8 +640,7 @@ In terms of the local case study, it seems there is a greater potential parallel
 
 In total, we estimate that around 2500 commuters make trips that are parallel to the line, of whom 1.1% currently cycle (N=28).
 We further estimate that under a Go Dutch scenario, the proportion of these commuter cycling would be 6.1% (N=158), while under the Ebike scenario, it would be 15.4% (N=397).
-The Go Dutch and Ebike scenarios assume that English commuters acquire a Dutch cycling culture and Dutch levels of infrastructure: A high quality, traffic-free cycle route along the Lewes-Uckfield train line could be a helpful step towards achieving Dutch infrastructure.
-However, it should be remembered that the impact of the cycle path might also depend on the quality of the surrounding cycle network.
+The Go Dutch and Ebike scenarios assume that English commuters acquire a Dutch cycling culture and Dutch levels of infrastructure: A high quality, traffic-free cycle route along the Lewes-Uckfield train line could be a useful step towards achieving Dutch infrastructure, although it should be remembered that the impact of the cycle path might also depend on the quality of the surrounding cycle network.
 It should also be remembered that this analysis only examines commuter cycling; adding in cycling potential for other cycling types, e.g. leisure cycling, might generate considerably higher estimates as to the number of users.
 
 The proposed method raises questions about policy priorities related to mode choice: in cases where there is potential for improving walking, cycling, and public transport, which are favoured?
@@ -647,13 +649,13 @@ The methods outlined in this paper have the potential to be used in situations b
 For example, in places where there are linear features that are conducive to conversion into walking and cycling paths such as disused railway lines, roads, or along privately owned routes.
 The methods could be used to decide where along these these features investments should be prioritised.
 
-In terms of the methods for quantifying the potential for desire lines parallel and perpendicular to proposed routes, this paper will probably be of most use as the basis for further work.
+It is in terms of the methods for quantifying the potential for desire lines parallel and perpendicular to proposed routes that this paper will probably be of most use as the basis for further work.
 The Lewes-Uckfield line has served a useful purpose in this regard, as the case study is small enough to identify specific desire lines of interest and explore the methodology on local datasets that are not overwhelmingly large.
 The work provides many interesting avenues for further development and research, including:
 
 -   The estimation of angles on a *per segment* basis, rather than simply for the whole route.
--   Improving the input data, including additional trip purposes (the analysis only considers cycle commuting), increased geographical resolution (e.g. to the Lower Super Output Area level used in recent versions of the PCT), and analysis of multiple route options.
--  Automating the analysis of 'parallels' and 'severance points' by creating functions that take desire lines and a proposed route as inputs and output the results with a single command. This could potentially be implemented in the R package **stplanr**.
+-   Improvements to the input data, including additional trip purposes (the analysis only considers cycle commuting), increased geographical resolution (e.g. to the Lower Super Output Area level used in recent versions of the PCT), and analysis of a range of proposed route options rather than just one.
+-  The automation of the analysis of 'parallels' and 'severance points' by creating functions which take desire lines and a proposed route as inputs and output the results with a single command. This could potentially be implemented in the R package **stplanr**.
 -   The extension of the method to quantify the level of overlap between proposed cycle networks and a series of desire lines or a route network.
 
 A limitation of the current approach from a policy perspective is that the estimated impacts are presented as absolute values.

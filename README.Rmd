@@ -214,16 +214,16 @@ The methods have been implemented as functions in the R package **stplanr** [@lo
 ## Potential for severance
 
 Severance occurs when active travel along cyclable desire lines with high cycling potential is prevented or made more difficult by obstacles such as rivers, fast roads or railway tracks.
-A degree of severance can be expected along the entire length of linear infrastructures.
-However, the degree of severance will be greatest in certain *severance pinch points* (henceforth referred to as severance points), for example, segments along a rail track that intersects desire lines connecting residential areas with employment zones on the other side.
+A degree of severance can be expected along the full of linear infrastructures.
+However, the degree of severance will be greatest in certain *severance pinch points* (henceforth referred to as severance points), for example, segments along a rail track which intersects desire lines connecting residential areas with employment zones on the other side.
 
-The methodology used to identify the proposed route segments with the highest potential to cause severance (assuming the transport infrastructure is new) consists of three stages:
+The methodology used to identify proposed route segments with high potential to cause severance (assuming the transport infrastructure is new) consists of three stages:
 
 -   Identify the desire lines which intersect with the infrastructure.
--   Quantify the number of potential cyclists blocked for each segment of the infrastructure.
+-   Quantify the number of potential cyclists blocked along segments of the infrastructure associated with every segment.
 -   Subset the segments which block the highest number of potential cyclists and identify potential crossing points.
 
-Note that based on the three-stage methodology outlined above, severance points are, in fact, more precisely described as 'severance segments', along which a range of points could be chosen for crossing points. However, the term 'severance point' is more intuitive, so we use this term throughout.
+Note that based on the three-stage methodology outlined above, severance points are, in fact, more precisely described as 'severance segments' along which a range of points could be chosen for crossing points. However, the term 'severance point' is more intuitive, so we use this term throughout.
 
 ## Potential cycling uptake along 'parallels'
 
@@ -238,20 +238,20 @@ To identify parallels to linear features (i.e., a new road or rail line), a five
 
 ## Potential for cycling and public transport integration
 
-Increased travel to public transport is likely to occur near public transport stops and on desire lines with an origin and destination near connected public transport nodes (typically bus stops or train stations).
-To estimate the potential uptake of cycling due to integration with new public transport services associated, we assume that stops have suitable cycle parking and safe routes between the public transport stop and the origin/destination. The method consists of the following stages:
+Increased travel to public transport is likely to occur near public transport stops and on desire lines that have an origin and destination near connected public transport nodes (typically bus stops or train stations).
+The methodology used to estimate the potential uptake of cycling due to integration with new public transport services associated assumes that new nodes have suitable provision for cycling, including safe cycling routes to the stations/stops and cycle parking and consists of the following stages:
 
 -   Subset trips that could feasibly use public transport in terms of boarding and alighting, by subsetting those with both origin and destination within a given distance of a planned station/stop. <!-- what distacne was used? Perhaps also exclude minimum distance (no point cycling 50 metres?-->
 -   Remove lines that have the same stop as their closest origin and destination.
--   Remove lines linked by existing public transport, thus will not change with the new linear infrastructure.
+-   Remove lines which are linked by existing public transport, thus will not change with the new linear infrastructure.
 -   Create new desire lines and routes that are from Origin/Destinations to public transport.
 -   Remove desire lines and routes where the cycling to and from public transport is greater than 1.1 times the direct cycling route, as these travellers are unlikely to use public transport. <!-- why 1.1? -->
--   Calculate the change in cycling potential along these new desire lines.
+-   Calculate change in cycling potential along these new desire lines.
 
 This method makes several simplifying assumptions that may or may not be valid depending on the nature of the new linear infrastructure.
 Firstly, the method is ignorant of the public transport network and so assumes that travel between any pair of stops is possible and practical.
 If this were not the case, it would be necessary to break the analysis into connected parts and analyse each part of the networks separately.
-Secondly, the method is not aware of the financial and time costs associated with public transport.
+Secondly, the method is not aware of financial and time costs associated with public transport.
 While the method can identify routes that are likely to be quicker to take a combined active travel and public transport journey than merely active travel directly, it does not consider the relative difference with driving directly.
 Therefore, care should be taken when assigning cyclist to these new routes.
 Finally, the method does not consider the proportion of walking and cycling to and from the public transport stop.
@@ -319,7 +319,7 @@ This area is illustrated in Figure \@ref(fig:lc).
 knitr::include_graphics("figures/lewes-uckfield-overview.png")
 ```
 
-The total number of single-stage commuters that pass through the buffer is higher: `r # sum(l_lc$all)` xx [todo - recalculate] commuters.
+The total number of single-stage commuters that pass through the buffer is higher: `r # sum(l_lc$all)` 56,536 commuters.
 As Figure \@ref(fig:lc) illustrates, however, many of these commuters are not travelling parallel to the train line.
 The majority of desire lines intersecting the buffer are between Brighton, the largest city in the region, and its surrounding settlements (see the high density of flows in the far south-west of Figure \@ref(fig:lc)).
 Only a few hundred commuters pass directly parallel to the route, mostly of medium distance from 10 to 20 km (route distance) between MSOAs in Lewes, Ringmer, and Uckfield.

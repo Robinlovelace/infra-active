@@ -120,11 +120,12 @@ These include:
 
 <!-- *Environmental impact assessment* ... -->
 
-Of existing impact assessment approaches, HIA and TIA have the most obvious links to active travel.
+Of existing impact assessment approaches, Health Impact Assessment (HIA) and Transport/Traffic/Transportation Impact Assessment (TIA) have the most obvious links to active travel.
 Even when these additional assessment exercises are undertaken, or when they are amalgamated with the wider process of Strategic Environmental Assessment (SEA) [@tajima_should_2013], active travel impacts are rarely considered, let alone quantified.
-This has been noted in the context of road building schemes: "there is very little empirical data on the impact of road transport interventions" aside from injury reduction estimates [@thomson_assessing_2008].
+This has been noted in the context of road building schemes: "there is very little empirical data on the [health] impact of road transport interventions" aside from injury reduction estimates [@thomson_assessing_2008].
 <!--  I can't see where TIA is defined, plus SEA is already defined -->
-Since then, there has been an increase in the research attention focussed on the wider impacts of road construction, including A notable research project in this area is [Traffic and Health in Glasgow](http://www.cedar.iph.cam.ac.uk/research/directory/traffic-health-glasgow/) which analysed the impacts of an extension to the M74 motorway in 2011.
+Since then, there has been an increase in the research attention focussed on the wider impacts of road construction.
+A notable research project in this area is [Traffic and Health in Glasgow](http://www.cedar.iph.cam.ac.uk/research/directory/traffic-health-glasgow/) which analysed the impacts of an extension to the M74 motorway in 2011.
 This project has resulted in numerous findings, including evidence of reduced levels of physical activity among participants who lived in close proximity to the motorway [@prins_effects_2017].
 Notably, the project found evidence of increased car use in areas affected by the new road, although no evidence of active travel impacts was identified [@foley_effects_2017].
 
@@ -145,7 +146,7 @@ Despite the importance of active travel modes, there are few tools for a priori 
 One tool that has been developed specifically to explore active transport potential at regional to street levels (the geographic scope of many large transport infrastructure projects) is the Propensity to Cycle Tool (PCT) [@lovelace_propensity_2017].
 The PCT is a publicly accessible tool for exploring current cycling levels and future potential under a range of national scenarios (see [www.pct.bike](http://www.pct.bike/)).
 This prior work, and the fact that the PCT is open source, suggests the underlying methods --- geographic analysis of travel desire lines, routes and route networks --- could also be used for ATIA, but using local rather than global scenarios of change.
-Building on this context, the remainder of this paper sets out methods for doing so and discusses the implications for major transport infrastructure plans.
+
 
 <!-- ## Why is active travel omitted from IA? - commented out for now as not directly relevant -->
 
@@ -159,7 +160,6 @@ Building on this context, the remainder of this paper sets out methods for doing
 The present paper seeks to address this research and methodological gap via geographical methods and emphasis on cycling potential.
 
 The lack of organisational overlap between major transport infrastructure and active travel interventions helps explain why the two are seldom considered.
-There has been little research into the active travel impacts of major infrastructure projects.
 Yet, as we shall see in the next section, major transport infrastructure has the potential to have a wide range of impacts on transport behaviour overall and levels of active travel in particular.
 The purpose of this paper is to create a framework for the consideration of active travel impacts of major transport infrastructure.
 More importantly, from a practitioner perspective, it outlines and demonstrates methods for assessing these impacts and prioritising interventions that will reduce the negative impacts on walking and cycling.
@@ -202,8 +202,14 @@ This effect can manifest at a substantial distance from the new infrastructure b
 
 ## Impacts during construction
 
-Whilst the finished state of a project will have long lasting impacts, the impact during construction can have a larger, albeit temporary, impact. Construction projects of any size result in localised increases in traffic from the movement of workers and materials.
+Whilst the finished state of a project will have long lasting implications for active travel (and other aspects of sustainability not covered here), the impact during construction can have a larger, albeit temporary, impact.
+Construction projects of any size result in localised increases in traffic from the movement of workers and materials.
+Existing roads are often closed temporarily to allow for construction activity to occur, which can cause travelers to have to detour and certain trips to no longer be feasible.
 Where existing roads do not provide suitable access, temporary roads are constructed, which can mean that the impacts described in the preceding sections are magnified.
+These impacts are harder to model than the others because they are highly dependent on the construction processes and practices in place.
+
+However, it is worth considering construction phase impacts to inform countermeasures.
+Heavy trucks could be allowed to travel through residential areas or along active travel routes during certain times where there are low levels of walking and cycling, reducing impacts, for example
 
 # Methodology
 

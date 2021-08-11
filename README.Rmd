@@ -531,8 +531,8 @@ However, the method outlined above could be combined with existing techniques to
 
 Based on the methods presented in the previous sections, summary statistics for each of the desire line subsets, based on parallels and severed routes, can be compared with all desire lines in the study area.
 These are presented in the tables below.
-Table 1 contains summary statistics on the total number, car dominance and level and cycling for each subset.
-<!-- no memtion of cars in table --> Table 2 contains scenario-specific estimates of cycling potential for each of the desire line subsets.
+Table 1 contains summary statistics on the number of trips affected by each type of impact currently (based on 2011 data on travel to work) and under the 'Ebike' scenario of change, under which cycling levels rise to levels seen in The Netherlands assuming high uptake of electric bikes [@lovelace_propensity_2017].
+The results are presented for two scenarios to highlight the fact that active travel impacts will not only affect current cyclists, but future potential cyclists also.
 
 ```{r}
 lines_subset = c("Touching buffer", "Parallel selection", "Perpendicular selection")
@@ -569,7 +569,7 @@ res_stations = readRDS("res_stns.Rds")
 # res_sub = res[sel_res,]
 res_sub = rbind(res[1:3,], res_stations[1,], res[4:6,], res_stations[2,])
 names_scens = c("Within 10 km of route", "Parallel to route", "Severed by route", "Cycle-rail integration")
-names_scens = c("Baseline", names_scens, "Scenario", names_scens)
+names_scens = c("Baseline", names_scens, "Ebike scenario", names_scens)
 res_sub[2:4] = apply(res_sub[2:4], 2, round, 1)
 empty_string = rep("", ncol(res_sub))
 res_sub = rbind(empty_string, res_sub[1:4,], empty_string, res_sub[5:8,])

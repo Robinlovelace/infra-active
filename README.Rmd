@@ -220,14 +220,14 @@ The methods have been implemented as functions in the R package **stplanr** [@lo
 
 ## Potential for severance
 
-Severance occurs when active travel along cyclable desire lines with high cycling potential is prevented or made more difficult by obstacles such as rivers, fast roads or railway tracks.
+Severance occurs when movement along routes with high active travel potential is prevented or made more difficult by obstacles such as rivers, fast roads or railway tracks.
 A degree of severance can be expected along the full of linear infrastructures.
 However, the degree of severance will be greatest in certain *severance pinch points* (henceforth referred to as severance points), for example, segments along a rail track which intersects desire lines connecting residential areas with employment zones on the other side.
 
 The methodology used to identify proposed route segments with high potential to cause severance (assuming the transport infrastructure is new) consists of three stages:
 
 -   Identify the desire lines which intersect with the infrastructure.
--   Quantify the number of potential cyclists blocked along segments of the infrastructure associated with every segment.
+-   Quantify the number of potential cyclists blocked along segments of the infrastructure.
 -   Subset the segments which block the highest number of potential cyclists and identify potential crossing points.
 
 Note that based on the three-stage methodology outlined above, severance points are, in fact, more precisely described as 'severance segments' along which a range of points could be chosen for crossing points. However, the term 'severance point' is more intuitive, so we use this term throughout.
@@ -390,7 +390,9 @@ tm_shape(buff) + tm_borders(col = "blue", lwd = 3) +
 ```
 
 The centre points of the desire lines intersecting with the Lewes-Uckfield route buffer are presented in Figure \@ref(fig:metafigure)a.
-These represent `r # round(sum(sel_centrepoint)/length(sel_centrepoint) * 100, 1)`% of the desire lines in the study area, defined by the 10 km buffer.
+These represent 57%
+<!-- `r # round(sum(sel_centrepoint)/length(sel_centrepoint) * 100, 1)` -->
+of the desire lines in the study area, defined by the 10 km buffer.
 
 <!-- this figuure is unclear -->
 
@@ -402,7 +404,7 @@ knitr::include_graphics("figures/infra-selection-all.png")
 
 The process of dividing the proposed route of the major infrastructure, in this case a railway between Lewes and Uckfield, is illustrated in Figure \@ref(fig:segs)a.
 The method could be applied to larger and more complex routes, e.g., that of the proposed HS2 route in the UK or major planned roads in other countries.
-Selecting maximum/average segment lengths carefully is needed to ensure the results are both sufficiently high resolution to act on but sufficiently aggregated to interpret and visualise.
+Careful selection of segment lengths is needed to ensure the results are both sufficiently high resolution to act on but sufficiently aggregated to interpret and visualise.
 
 <!-- 
 ```{r segments, fig.cap="Demonstration of the method for splitting the route into segments (a) ", out.height="7cm", eval=FALSE}
@@ -410,7 +412,7 @@ knitr::include_graphics("figures/lewes-uckfield-segments.png")
 ```
 -->
 
-```{r segs, fig.cap="Illustration of the method of splitting the route into discrete segments using the line segment function from the stplanr R package (a) and cycling potential (under the Government Target scenario) severed by the proposed rail line (b), in which line width is proportional to the square root of cycling potential severed.", echo=FALSE}
+```{r segs, fig.cap="Illustration of the method of splitting the route into discrete segments using the line segment function from the stplanr R package (a) and cycling potential severed by the proposed rail line (b), in which line width is proportional to the square root of cycling potential severed.", echo=FALSE}
 knitr::include_graphics("figures/route-sel.png")
 ```
 
@@ -477,10 +479,10 @@ tm_shape(l_lc) + tm_lines(col = "grey", lwd = 3) +
 ### Quantifying severance per segments of the train line
 
 The cycling potential of the intersecting 'perpendicular' lines was then summed *per 1 km segment* of the rail line.
-The results for the Government Target scenario, are presented in \@ref(fig:segs)b, which shows, as one would expect, that severance impacts would be greatest at the ends of the proposed route, where population densities and employment opportunities are greatest.
+The results are presented in Figure \@ref(fig:segs)b, which shows, as one would expect, that severance impacts would be greatest at the ends of the proposed route, where population densities and employment opportunities are greatest.
 <!-- what is the 'Government Target scenario'? - either define or remove -->
 
-```{r perpagg, fig.cap="Total cycling potential (under the Government Target scenario) 'severed' by the proposed rail line. Line width is proportional to the square root of the total cycling potential for each segment.", fig.height=5, eval=FALSE}
+```{r perpagg, fig.cap="Total cycling potential 'severed' by the proposed rail line. Line width is proportional to the square root of the total cycling potential for each segment.", fig.height=5, eval=FALSE}
 plot(l_agg, lwd = sqrt(l_agg$govtarget_slc) * 2)
 ```
 
@@ -493,7 +495,7 @@ Overall, because the proposed line does not separate any large settlements or wo
 However, to demonstrate the method of identifying places to intervene to minimise severance, Figure \@ref(fig:perpmost) illustrates the 1 km segment of the proposed line with the highest potential for severance in context.
 This is clearly in a populated part of Lewes, where travel between both sides of the new line could be affected by the route.
 
-```{r perpmost, fig.cap="The 1 km segment on the proposed rail line with the highest level of severance in cycling potential, under the Government Target scenario."}
+```{r perpmost, fig.cap="The 1 km segment on the proposed rail line with the highest level of severance in cycling potential."}
 l_most = l_agg[which.max(l_agg$govtarget_slc),]
 # osm_tiles_most = tmaptools::read_osm(tmaptools::bb(l_most, 4), raster = TRUE)
 # tm_shape(osm_tiles_most) + tm_raster() +

@@ -568,14 +568,13 @@ res_stations = readRDS("res_stns.Rds")
 # sel_res = grepl(pattern = "11|Gov", rownames(res))
 # res_sub = res[sel_res,]
 res_sub = rbind(res[1:3,], res_stations[1,], res[4:6,], res_stations[2,])
-names_scens = c(gsub(pattern = "Census 2011: ", replacement = "", row.names(res_sub[1:3,])),
-                "Cycling to stations")
+names_scens = c("Within 10 km of route", "Parallel to route", "Severed by route", "Cycle-rail integration")
 names_scens = c("Baseline", names_scens, "Scenario", names_scens)
 res_sub[2:4] = apply(res_sub[2:4], 2, round, 1)
 empty_string = rep("", ncol(res_sub))
 res_sub = rbind(empty_string, res_sub[1:4,], empty_string, res_sub[5:8,])
 res_sub = cbind(Scenario = names_scens, res_sub)
-knitr::kable(res_sub, digits = 1, caption = "Current and potential future cycle commuters who may be affected by the proposed rail line, under baseline and future scenarios (based on the 2011 Census and a doubling in cycling potential) for the three types of affected desire lines plus all desire lines in the vicinity (touching the 10 km buffer) surrounding the proposed route.", row.names = F)
+knitr::kable(res_sub, digits = 1, caption = "Current and potential future cycle commuters who may be affected by the proposed rail line, under baseline and future scenarios (based on the 2011 Census and a doubling in cycling potential) for the three types of affected desire lines plus all desire lines in the vicinity (touching the 10 km buffer) surrounding the proposed route.", row.names = F, booktabs = TRUE)
 ```
 
 Overall, the potential for cycling along routes parallel to the track appears to be somewhat greater than the cycling potential of 'severed' routes.
@@ -588,8 +587,9 @@ This is shown in Figure \@ref(fig:pct-uck).
 
 <!-- figure out of date -->
 
-```{r pct-uck, fig.cap="Cycling potential (red lines) along the transport network between Lewes and Uckfield, under the Ebike scenario of the Propensity to Cycle Tool (see [pct.bike/east-sussex/](http://pct.bike/east-sussex/)).", fig.height=7}
-knitr::include_graphics("figures/lewes-uckfield-pct-ebike.png")
+```{r pct-uck, fig.cap="Active travel potential represented as number of trips per day in the red lines on the route network across the transport network between Lewes and Uckfield, under the Ebike scenario of the Propensity to Cycle Tool (see pct.bike/east-sussex/).", fig.height=7}
+# knitr::include_graphics("figures/lewes-uckfield-pct-ebike.png")
+knitr::include_graphics("figures/overview-potential.png")
 # osm_tiles_local = read_osm(bb(buff))
 # rnet = readRDS("../pct-data/east-sussex/rnet.Rds")
 # rnet = rnet[buff,]
@@ -619,7 +619,7 @@ Calculating the increase in active travellers along these routes would be depend
 However, even without a precise quantification the mode shift, the method highlights which areas may have increased active travel.
 It is notable that in \@ref(fig:segs)d not every station has an associated active travel route, this is because the new railway would not affect travel options evenly.
 
-```{r stns, echo=FALSE, fig.cap="The potential for active travel to stations on the route network (red lines) and [", out.width= "60%"}
+```{r stns, echo=FALSE, fig.cap="The potential for active travel to stations, representing potential benefits of integration between public transport nodes along new infrastructure.", out.width= "60%"}
 knitr::include_graphics("figures/stations.png")
 ```
 

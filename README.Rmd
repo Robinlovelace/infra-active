@@ -72,11 +72,12 @@ As authorities plan for recovery in the aftermath of the global coronavirus pand
 Such projects may range from the localised widening of a rural road to the construction of a new high-speed railway.
 Prior to the pandemic, an additional 3-5 million kilometres of roads were planned to be constructed by the middle of the century [@meijer_global_2018].
 Nearly 12,000 kilometres of high-speed rail were under construction in 2020, representing a 25% increase in total high speed route length.
+The costs and benefits of such schemes are contested and subject to uncertainty [@salling_2009_assessment].
 
 Meanwhile, the pressure on authorities to consider how such projects impact sustainability objectives continues to grow.
-In much of the developed world, transport is now the largest sector of the economy by greenhouse gas emissions.
-As new emission reduction targets are set on regional, national and international levels, the types of infrastructure being prioritised will change as the need to shift towards more sustainable modes of moving people and goods across land becomes more urgent and widely understood.
-
+In much of the developed world, motorised transport is now the largest sector of the economy by greenhouse gas emissions, and a major cause of health inequalities arising from environments that cause injury and death through collisions and inactive lifestyles associated with non-communicable diseases. 
+As new emission reduction and active travel targets are set on regional, national and international levels, the types of infrastructure being prioritised will change.
+<!-- as the need to shift towards more sustainable modes of moving people and goods across land becomes more urgent and widely understood. -->
 Whilst the need for modal shift is increasingly well understood, the impacts that any new infrastructure might have on already established sustainable modes of travel such as walking and cycling --- also referred to as active travel --- is not.
 Despite impact assessment being standard practice in development projects worldwide, its use to explore the ways in which new linear infrastructure can impact on or indeed benefit active travel is limited.
 
@@ -366,6 +367,7 @@ l_lc$`Touching buffer` = TRUE
 #   line_segment(., segment_length = 1000) %>% 
 #   st_as_sf(.)
 # saveRDS(l_seg, "l_seg.Rds")
+piggyback::pb_download("l_seg.Rds")
 l_seg = readRDS("l_seg.Rds")
 
 # saveRDS(l_seg, "l_seg.Rds")
@@ -630,8 +632,9 @@ tm_shape(l_lc) + tm_lines(col = "grey", lwd = 3) +
 <!-- the PCT scenariod have never been explained, and it not clear that you are using the PCT as a tool as well as asource of data -->
 
 This paper has articulated the concept of Active Travel Impact Assessment (ATIA) and demonstrated the potential for geographic methods to assess the impacts of major infrastructure projects on walking and cycling at all stages in the planning process.
-The techniques developed in this paper require relatively low time and financial resources, relative to the costs of major infrastructure projects such as new roads and railways, which can reach many billions of dollars and take decades to complete.
-Considering these resource implications, and the fact that impact assessments are generally more effective when undertaken early in the planning process, we believe the approach will be of most use when undertaken at scheme inception and scoping.
+The methods presented have relatively low time and financial resource requirements, compared with overall impact assessment evaluation work, including Environmental Impact Assessment (IEA).
+The costs of major infrastructure projects such as new roads and railways can reach many billions of dollars and take decades to complete; any changes to schemes to minimise active travel impacts --- or the cancellation of schemes altogether in light of evidence suggesting that active travel costs outweigh journey time and emissions benefits --- could save millions each year, meaning that the process of ATIA could have very high benefit cost ratios.
+Considering these resource implications, and the fact that impact assessments are generally more effective when undertaken early in the planning process, we believe the approach will be of most use when undertaken earlier in the planning process, and at scheme inception and scoping in particular.
 If undertaken sufficiently early in the planning process, methods for ATIA could change the outcome of planning decisions, including whether or not a project goes ahead: if negative active travel impacts are large relative to time and other savings, proposed new infrastructure should be questioned.
 
 A real world case study was used to demonstrate how the methods can be applied in practice and the kind of results they can generate.
@@ -673,7 +676,7 @@ The typology and framework detailed in this paper allow an explicit impact asses
 
 # Acknowledgements
 
-Thanks to Shane Snow, Active Travel Sponsor, High Speed & Major Rail Projects, Department for Transport, for comissioning this project and providing maps of the Lewes-Uckfield route.
+Thanks to Shane Snow, Active Travel Sponsor, High Speed & Major Rail Projects, Department for Transport, for commissioning this project and providing maps of the Lewes-Uckfield route.
 
 Thanks to Matthew Whittle, Analyst at Geoplan, for digitising a scanned image of the proposed route.
 

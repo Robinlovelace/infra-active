@@ -1,6 +1,6 @@
 ---
 title: 'Geographic methods for assessing the active travel impacts of major transport infrastructure projects'
-# author: "Robin Lovelace, Malcolm Morgan, Craig Morton, Anna Goodman"
+author: "Robin Lovelace, Malcolm Morgan, Craig Morton, Gareth Dennis, Dina Jankovic"
 date: "`r Sys.Date()`"
 # output: md_document
 output:
@@ -42,19 +42,22 @@ purrr::map_lgl(pkgs, require, character.only = TRUE)
 
 # Abstract {-}
 
-Major transport infrastructure projects affect many aspects of life.
-This is well known and sometimes acted on, thanks in part to well-established methods in economic appraisal, cost-benefit analysis and environmental impact assessment.
-More recently, other types of assessment have emerged, including health and equality impact assessment.
+Major transport infrastructure projects affect every aspect of life, from health and the economy to the environment.
+Such impacts can be formally accounted for in the planning process using established processes, including economic appraisal, cost-benefit analysis and environmental impact assessment.
+More recently, other types of assessment have emerged, including Health Impact Assessment (HIA) and equality impact assessment (EqIA) .
 <!-- [@harris-roxas_differing_2011]. -->
-There is emerging literature focussing explicitly on active travel impacts, much of which seeks to evaluate the impacts of new schemes on walking.
+<!-- Recent research has explicitly focussed on active travel impacts, much of which seeks to evaluate the impacts of new schemes on walking. -->
 <!-- [@mueller_health_2015]. -->
-However, there is little research in the literature on methods for assessing likely impacts of new schemes before they are built (a priori), let alone geographic methods for assessing potential impacts based on potential levels of walking and cycling.
-Motivated by the need for accessible and scalable tools to assess active travel impacts of new developments, this paper sets out methods for active travel impact assessment.
-It is based on the following classification of active travel impacts: *severance*, when new infrastructure cuts across routes with high active travel potential; *parallels*, opportunities for constructing active travel features parallel to new infrastructure; *integration* with existing transport services, where new or different active travel options are unlocked by new infrastructure; and impacts that arise during the *construction* phase of major infrastructure projects.
-The methods allow enable actionable evidence on the first three types of impact to be generated from two inputs that are widely available: origin-destination data representing travel in the local area from surveys or simulations, and the centreline of the proposed new linear infrastructure.
+However, there has to date been little in the way of research into or applications of methods for evaluating the impacts of major infrastructure projects on walking and cycling.
+This paper paper sets out to help fill this gap in scheme appraisal by developing new methods for Active Travel Impact Assessment (ATIA).
+In the context of climate and obesity crises, it is particularly important to take these impacts into account *before* new infrastructure schemes are approved.
+Before, during and after the construction phase, evidence from ATIA can also be used to mitigate impacts, for example by highlighting places where new crossings could reduce severance.
+The ATIA methodology proposed in this paper is based on the following classification of active travel impacts: *severance*, when new infrastructure cuts across routes with high active travel potential; *parallels*, opportunities for constructing active travel features parallel to new infrastructure; *integration* with existing transport services, where new or different active travel options are unlocked by new infrastructure; and impacts that arise during the *construction* phase of major infrastructure projects.
+The input datasets are 1) origin-destination data representing travel in the local area, which can obtained from secondary data sources, surveys or simulations; and 2) the centreline of proposed infrastructure.
 The methods have relatively low time and cost requirements, enabling their use throughout the planning process.
-We envision the approach being used to assess scheme sustainability, rank route options, inform safe walking and cycling routes to public transport nodes on the new infrastructure and prioritise crossing points options during project scoping, planning, construction and post-build stages.
-A case study of a proposed railway between Lewes and Uckfield in Essex, UK, demonstrates the methods' real-world application and potential to be used to assess larger infrastructure projects such as high speed rail projects.
+The approach can be used to support: assessment of scheme sustainability, ranking of route options, prioritisation of safe routes to public transport nodes alongside the proposed scheme, and investment in crossing points.
+A case study of a proposed railway between Lewes and Uckfield in Essex, UK, demonstrates the methods' real-world application and potential.
+We conclude that the approach has great potential to assess the active travel impacts of proposed infrastructure, including high speed rail projects.
 
 <!-- Cycling and Society abstract -->
 

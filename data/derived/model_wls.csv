@@ -1,0 +1,8 @@
+model,term,estimate,se,ci_low,ci_high,p_value
+OLS weighted by commuters,(Intercept),1.005,0.259,0.498,1.513,0.000103
+OLS weighted by commuters,band50-500 m,0.209,0.196,-0.174,0.593,0.285
+OLS weighted by commuters,"band5500-1,000 m",0.438,0.168,0.108,0.767,0.00925
+OLS weighted by commuters,band51-2 km,0.212,0.132,-0.047,0.472,0.109
+OLS weighted by commuters,band52-5 km,0.234,0.11,0.018,0.451,0.0336
+OLS weighted by commuters,log_dens,4.397,0.067,4.266,4.528,0
+OLS weighted by commuters,imd_rank,0,0,0,0,7.04e-116

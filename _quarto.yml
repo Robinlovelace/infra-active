@@ -1,0 +1,32 @@
+project:
+  type: website
+  output-dir: docs
+
+execute:
+  freeze: auto
+
+website:
+  site-url: https://robinlovelace.github.io/infra-active/
+  title: "infra-active"
+  repo-url: https://github.com/Robinlovelace/infra-active
+  repo-branch: main
+  repo-actions: [edit, issue]
+  navbar:
+    background: primary
+    search: true
+    left:
+      - text: "Paper"
+        href: index.qmd
+      - text: "SRN severance"
+        href: srn.qmd
+    right:
+      - icon: github
+        href: https://github.com/Robinlovelace/infra-active
+        aria-label: GitHub
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    number-sections: true

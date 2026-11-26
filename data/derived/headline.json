@@ -1,0 +1,19 @@
+{
+  "n_lsoas": 33755,
+  "n_lsoas_model": 32747,
+  "commuters_total": 18083865,
+  "active_share_overall_weighted": 14.22,
+  "share_by_band_weighted": {
+    "0-500 m": 13.97,
+    "500-1,000 m": 14.27,
+    "1-2 km": 14.06,
+    "2-5 km": 14.37,
+    ">5 km": 14.18
+  },
+  "raw_gap_pp": -0.21,
+  "adjusted_gap_pp": -0.08,
+  "adjusted_gap_ci": [-0.3, 0.45],
+  "commuters_within_500m": 1042378,
+  "counterfactual_people": -803,
+  "srn_km": 14593
+}

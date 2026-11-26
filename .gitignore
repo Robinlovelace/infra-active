@@ -1,14 +1,28 @@
+# R
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
-*.Rds
-*.Rdata
-*.pdf
-*.tex
-cycle-tools-wide.csv
-rsconnect
-infra-active-cycling-society-abstract-rl.
-*_file*
-infra-active-cycling-society-abstract-rl.*
-*.html
+
+# Quarto working state (rendered docs/ IS committed for GitHub Pages)
+/.quarto/
+/_freeze/
+
+# Re-derivable raw downloads (derived outputs in data/derived are committed)
+data/cache/
+*.gpkg
+
+# Map intermediates and large generated assets (not pushed; reproducible via R/srn + tippecanoe)
+docs/map/data/*.geojson
+docs/map/data/*.pmtiles
+data/derived/lsoa_base.csv
+data/derived/lsoa_analysis.csv
+
+# Node
+map/node_modules/
+
+# OS / editor
+.~lock.*
+.DS_Store
+
+**/*.quarto_ipynb

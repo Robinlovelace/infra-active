@@ -45,7 +45,11 @@ keep <- c(
 m <- analysis[, ..keep]
 setnames(m, "residents_lsoa", "residents")
 lsoa <- merge(lsoa, m, by.x = "LSOA21CD", by.y = "lsoa21cd")
-lsoa <- lsoa[, c("LSOA21CD", keep)]
+keep_final <- c("lsoa21cd", "name", "band_int", "share_active", "commuters",
+                "residents", "dens_km2", "imd_decile", "rural")
+lsoa <- lsoa[, c("LSOA21CD", setdiff(keep_final, "lsoa21cd"))]
+setnames(lsoa, "LSOA21CD", "lsoa21cd")
+lsoa <- lsoa[, keep_final]
 
 st_write(
   lsoa, file.path(out_dir, "lsoa.geojson"),

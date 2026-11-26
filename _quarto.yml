@@ -1,6 +1,9 @@
 project:
   type: website
   output-dir: docs
+  render:
+    - index.qmd
+    - srn.qmd
 
 execute:
   freeze: auto
